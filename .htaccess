@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  # Si c'est le cas, l'allumer :
+  rewriteEngine on
+  
+    rewriteCond %{THE_REQUEST} !^GET.*/public [NC]
+    rewriteRule ^(.*)$ /public/$1 [R=301,NE,L]
+  </IfModule>
