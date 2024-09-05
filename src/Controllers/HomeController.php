@@ -12,8 +12,8 @@ class HomeController
     //     $database= new Database;
     //     $this->DB = $database->getDB();
     // }
-    public function afficherPageDacceuil()
+    public function displayHome()
     {
-        include_once __DIR__ . '/../Views/acceuil.php'  ;
+        include_once __DIR__ . '/../Views/home.php' ;
     }
 }

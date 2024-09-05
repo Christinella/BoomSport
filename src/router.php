@@ -9,7 +9,7 @@ $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($route) {
     case HOME_URL:
-        $homeController->afficherPageDacceuil();
+        $homeController->displayHome();
         break;
     
     default:

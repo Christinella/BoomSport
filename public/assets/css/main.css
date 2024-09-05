@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+}
+#entete {
+    background-image: url(../Image/header.jpeg);
+    background-size: cover;
+    height: 250px;
+    background-position: center;
+    display: flex;
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: center; /* Centre les éléments verticalement */
+    position: relative;
+  }
+  
+  .logo {
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Permet de centrer l'image */
+  }
+
+  .container-blocs {
+    display: flex;
+    justify-content: space-between; /* Espace égal entre les blocs */
+    margin: 20px 50px; /* Espace autour des blocs */
+  }
+  
+  .bloc1 {
+    height: 400px;
+    background-image: url(../Image/sport.jpeg);
+    background-size: cover;
+    padding: 30px;
+    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
+  }
+  .bloc3 {
+    height: 400px;
+    background-image: url(../Image/bloc3.jpeg);
+    background-size: cover;
+    padding: 30px;
+    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
+  }
+  .bloc2 {
+    height: 300px;
+    margin-top: 7%;
+    background-image: url(../Image/jog.jpeg);
+    background-size: cover;
+    padding: 20px;
+    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
+  }
+  
+  .bloc:hover {
+    background-color: #e0e0e0; /* Changement de couleur au survol */
+  }
+  .Accueil {
+    position: absolute;
+    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    left: 5%; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    gap: 10%;
+    width: 200px;
+}
+.musculation {
+    position: absolute;
+    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    left: 25%;/* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    gap: 10%;
+    width: 200px;
+}
+
+.button-left button {
+    margin-right: 10px; /* Espace entre les boutons */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10%;
+    background-color: #437B21;
+}
+.Nutrition {
+    position: absolute;
+    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    right: 5%; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    gap: 10%;
+    width: 200px;
+}
+.Propos {
+    position: absolute;
+    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    right: 25%;/* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
+    gap: 10%;
+    width: 200px;
+}
+
+.button-right button {
+    margin-left: 10px; /* Espace entre les boutons */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10%;
+    background-color: #437B21;
+}
