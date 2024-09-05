@@ -1,4 +1,4 @@
-CREATE TABLE User_(
+CREATE TABLE Users(
    ID_User INT,
    Pseudonym VARCHAR(250) NOT NULL,
    Email VARCHAR(250) NOT NULL,
@@ -55,6 +55,6 @@ CREATE TABLE User_has_day_has_program(
    ID_Program VARCHAR(50),
    days DATE NOT NULL,
    PRIMARY KEY(ID_User, ID_Program),
-   FOREIGN KEY(ID_User) REFERENCES User_(ID_User),
+   FOREIGN KEY(ID_User) REFERENCES Users(ID_User),
    FOREIGN KEY(ID_Program) REFERENCES Program(ID_Program)
 );

@@ -11,4 +11,3 @@
     
     // Ne pas toucher :
     
-    define('DB_INITIALIZED', TRUE);
