@@ -10,4 +10,3 @@
     define('HOME_URL', '/');
     
     // Ne pas toucher :
-    

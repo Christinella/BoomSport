@@ -45,10 +45,10 @@ class Users
     }
     public function getisAdmin(): bool
     {
-        return $this->Password;
+        return $this->isAdmin;
     }
     public function setisAdmin() : bool
     {
-        return $this->Password;
+        return $this->isAdmin;
     }
 }

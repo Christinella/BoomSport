@@ -4,7 +4,7 @@ include_once __DIR__ ."/Includes/header.php";
 ?>
 <div class="button-left">
     <button class="Accueil">Accueil</button>
-    <button class="musculation">Musculation</button>
+    <button class="musculation" id="btnMusculation">Musculation</button>
 </div>
 <div class="button-right">
     <button class="Nutrition">Nutrition</button>

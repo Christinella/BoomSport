@@ -7,7 +7,7 @@ use src\Services\Hydratation;
 final class Sport
 {
     private int $ID_Sport;
-    private string $Name;
+    private string $name;
 
     use Hydratation;
 
@@ -19,8 +19,8 @@ final class Sport
     {
       $this->Id = $ID_Sport;
     }
-    public function setName(string $Name): void
+    public function setName(string $name): void
     {
-      $this->Name = $Name;
+      $this->Name = $name;
     }
 }   
