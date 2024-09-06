@@ -26,11 +26,7 @@ switch ($route) {
         } else {
             $homeController->inscription();
         }
-
-
-
-
-
+        break;
 
 
         case HOME_URL.'deconnexion':

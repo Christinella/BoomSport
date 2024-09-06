@@ -34,6 +34,7 @@ class UsersController
             
             // Redirection vers la page de connexion
             header('Location: '.HOME_URL.'connexion?success=Utilisateur créé avec succès!');
+            exit();
         }
         catch (\Exception $e){
             header('Location: '.HOME_URL.'inscription?success='.$e->getMessage());

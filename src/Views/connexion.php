@@ -28,7 +28,7 @@ include_once __DIR__ . '/Includes/header.php';
         </div>
 
         <div>
-            <a href="/inscription">je n'ai pas de compte</a>
+            <a href="<?= HOME_URL . 'inscription' ?>">je n'ai pas de compte</a>
         </div>
 
         <div>
