@@ -61,49 +61,6 @@
   .bloc:hover {
     background-color: #e0e0e0; /* Changement de couleur au survol */
   }
-  .Accueil {
-    position: absolute;
-    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    left: 5%; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    gap: 10%;
-    width: 200px;
-}
-.musculation {
-    position: absolute;
-    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    left: 25%;/* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    gap: 10%;
-    width: 200px;
-}
+ 
 
-.button-left button {
-    margin-right: 10px; /* Espace entre les boutons */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10%;
-    background-color: #437B21;
-}
-.Nutrition {
-    position: absolute;
-    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    right: 5%; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    gap: 10%;
-    width: 200px;
-}
-.Propos {
-    position: absolute;
-    top: 20px; /* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    right: 25%;/* Ajustez cette valeur pour placer les boutons où vous le souhaitez */
-    gap: 10%;
-    width: 200px;
-}
-
-.button-right button {
-    margin-left: 10px; /* Espace entre les boutons */
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10%;
-    background-color: #437B21;
-}
+ 

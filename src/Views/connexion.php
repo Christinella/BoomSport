@@ -2,10 +2,10 @@
 
 include_once __DIR__ . '/Includes/header.php';
 ?>
+<?php
 
 
-
-
+?>
 <div class="login-container">
     <h2>Connexion</h2>
 
@@ -36,4 +36,4 @@ include_once __DIR__ . '/Includes/header.php';
         </div>
     </form>
 </div>
-<?php
+

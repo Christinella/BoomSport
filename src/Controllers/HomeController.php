@@ -29,4 +29,8 @@ class HomeController
         session_destroy();
         header('Location: '.HOME_URL.'?success=Déconnexion réussie! ') ;
     }
+    public function displayApropos()
+    {
+        include_once __DIR__ . '/../Views/aPropos.php' ;
+    }
 }

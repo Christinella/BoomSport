@@ -8,7 +8,7 @@ $userController = new UsersController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
-
+// var_dump($_SERVER);die();
 switch ($route) {
     case HOME_URL:
         $homeController->displayHome();
@@ -27,7 +27,9 @@ switch ($route) {
             $homeController->inscription();
         }
         break;
-
+        case HOME_URL.'apropos':
+            $homeController->displayApropos();
+            break;
 
         case HOME_URL.'deconnexion':
             $homeController->logout();
