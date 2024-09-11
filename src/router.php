@@ -30,6 +30,9 @@ switch ($route) {
         case HOME_URL.'apropos':
             $homeController->displayApropos();
             break;
+        case HOME_URL.'admin':
+            $userController->login();
+            break;
 
         case HOME_URL.'deconnexion':
             $homeController->logout();

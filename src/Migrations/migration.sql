@@ -72,7 +72,7 @@ CREATE TABLE Users
   ID_User   INT          NOT NULL AUTO_INCREMENT,
   pseudonym VARCHAR(250) NOT NULL,
   email     VARCHAR(250) NOT NULL,
-  password  INT          NOT NULL,
+  password  VARCHAR(250) NOT NULL,
   isAdmin   BOOLEAN      NOT NULL,
   PRIMARY KEY (ID_User)
 );
