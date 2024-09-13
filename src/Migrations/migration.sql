@@ -53,6 +53,8 @@ CREATE TABLE Sport
 (
   ID_Sport INT          NOT NULL AUTO_INCREMENT,
   name     VARCHAR(250) NOT NULL,
+  image     VARCHAR(250) NOT NULL,
+  description TEXT NOT NULL,
   PRIMARY KEY (ID_Sport)
 );
 

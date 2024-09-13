@@ -60,8 +60,8 @@ class UsersController
             }
 
             if($user){
-                var_dump($user);
-                die;
+                // var_dump($user);
+                // die;
                 // Création de la session
                 $_SESSION['ID_User'] = $user['ID_User'  ];
                 $_SESSION['pseudonym'] = $user['pseudonym'];
@@ -69,10 +69,13 @@ class UsersController
                 $_SESSION['isAdmin'] = $user['isAdmin'];
                 $_SESSION['connecte'] = true;
 
-
-                // Redirection vers la page d'accueil
-                header('Location: '.HOME_URL.'sport');
-            }
+        if ($user['isAdmin'] ===1){
+            header('Location: '.HOME_URL.'admin');
+            exit();  
+        }else{
+            header('Location: '.HOME_URL.'sport');
+        }
+    }
             if ($user && password_verify($password, $user->password)) {
                 return $user;
               }

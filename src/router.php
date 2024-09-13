@@ -1,10 +1,12 @@
 <?php
 
 use src\Controllers\HomeController;
+use src\Controllers\AdminController;
 use src\Controllers\UsersController;
 
 $homeController = new HomeController;
 $userController = new UsersController;
+$adminController= new AdminController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -31,7 +33,10 @@ switch ($route) {
             $homeController->displayApropos();
             break;
         case HOME_URL.'admin':
-            $userController->login();
+            $adminController->displayHomeAdmin();
+            break;
+        case HOME_URL.'admin/sport':
+            $adminController->sport();
             break;
 
         case HOME_URL.'deconnexion':
