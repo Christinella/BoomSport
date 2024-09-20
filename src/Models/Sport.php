@@ -34,4 +34,4 @@ final class Sport
     public function setImage(string $image): void{
       $this->image = $image;
     }
-}   
+}  

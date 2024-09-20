@@ -14,6 +14,8 @@ class HomeController
     // }
     public function displayHome()
     {
+            // var_dump($_SESSION);
+            // die();
         include_once __DIR__ . '/../Views/home.php' ;
     }
     public function connexion()
@@ -27,6 +29,8 @@ class HomeController
     public function logout()
     {
         session_destroy();
+       
+
         header('Location: '.HOME_URL.'?success=Déconnexion réussie! ') ;
     }
     public function displayApropos()
