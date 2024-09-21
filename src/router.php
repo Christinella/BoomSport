@@ -4,11 +4,13 @@ use src\Controllers\HomeController;
 use src\Controllers\AdminController;
 use src\Controllers\SportController;
 use src\Controllers\UsersController;
+use src\Controllers\ProgramController;
 
 $homeController = new HomeController;
 $userController = new UsersController;
 $adminController = new AdminController;
 $sportController = new SportController;
+$programController = new ProgramController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -37,7 +39,8 @@ switch ($route) {
     case HOME_URL . 'admin':
         $adminController->displayHomeAdmin();
         break;
-    case HOME_URL . 'admin/allsports':
+    // Page Sport admin
+        case HOME_URL . 'admin/allsports':
         $adminController->allSport();
         break;
     case HOME_URL . 'admin/addsport':
@@ -54,6 +57,17 @@ switch ($route) {
                 $sportController->displayFormEditSport();
             }
             break;
+             // Page Programme admin
+            case HOME_URL . 'admin/allprograms':
+                $adminController->allProgram();
+                break;
+                case HOME_URL . 'admin/addprogram':
+                    if ($methode === 'POST') {
+                        $programController->addProgram();
+                    } else {
+                        $programController->displayFormAddProgram();
+                    }
+                    break;
     case HOME_URL . 'deconnexion':
         $homeController->logout();
         header('Location: ' . HOME_URL);

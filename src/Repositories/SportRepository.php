@@ -35,6 +35,7 @@ class SportRepository
     }   
 }
 
+
 public function getAllSports(){
     try {
         $stmt = $this->DB->query('SELECT * FROM sport');

@@ -22,8 +22,8 @@ class SportController
         try {
 
             $name = htmlspecialchars($_POST['name']);
-            $description = $_POST['description'];
-            $image = $_POST['image'];
+            $description = htmlspecialchars($_POST['description']);
+            $image = htmlspecialchars($_POST['image']);
 
             // if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
             //     $target_dir = "uploads/";
