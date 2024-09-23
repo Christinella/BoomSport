@@ -8,6 +8,10 @@ use src\Repositories\ProgramRepository;
 
 class ProgramController{
     public function displayFormAddProgram(){
+        $sportRepository = new SportRepository();
+        
+        // Get all sports and get sport name and id
+        $sports = $sportRepository->getAllSports();
         require_once __DIR__.'/../Views/admin/programs/add_program.php';
     }
     public function addProgram()

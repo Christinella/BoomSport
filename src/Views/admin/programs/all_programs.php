@@ -19,7 +19,7 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
 </div>
 
     <div class="row">
-        <?php if (!empty($program)): ?>
+        <?php if (!empty($programs)): ?>
             <?php foreach ($programs as $program): ?>
                 <div class="col-12 col-sm-6 col-md-4 mb-4">
                     <div class="card shadow-sm">
@@ -32,8 +32,8 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
                                 <li class="list-group-item">Image : <img src="<?php echo $program['image'];?>" alt="<?php echo htmlspecialchars($program['name']);?>" class="img-fluid"></li>
                             </ul>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <a href="<?php echo HOME_URL . 'admin/editsport' . $sport['ID_Sport']; ?>" class="btn btn-primary">Modifier</a>
-                                <form action="<?php echo HOME_URL . 'admin/deletesport' . $sport['ID_Sport']; ?>" method="post">
+                                <a href="<?php echo HOME_URL . 'admin/editsport' . $program['ID_Program']; ?>" class="btn btn-primary">Modifier</a>
+                                <form action="<?php echo HOME_URL . 'admin/deletesport' . $program['ID_Program']; ?>" method="post">
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
                             </div>

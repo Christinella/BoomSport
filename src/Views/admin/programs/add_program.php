@@ -7,11 +7,11 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2 class="text-center my-4">Ajouter un nouveau programme</h2>
-                
+
                 <?php if (isset($_GET['error'])): ?>
                     <div class="alert alert-danger"><?php echo $_GET['error']; ?></div>
                 <?php endif; ?>
-                
+
                 <?php if (isset($_GET['success'])): ?>
                     <div class="alert alert-success"><?php echo $_GET['success']; ?></div>
                 <?php endif; ?>

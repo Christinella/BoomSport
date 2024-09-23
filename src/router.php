@@ -68,6 +68,11 @@ switch ($route) {
                         $programController->displayFormAddProgram();
                     }
                     break;
+                // Page Exercise admin 
+                case HOME_URL . 'admin/allprograms':
+                    $adminController->allProgram();
+                    break;
+
     case HOME_URL . 'deconnexion':
         $homeController->logout();
         header('Location: ' . HOME_URL);

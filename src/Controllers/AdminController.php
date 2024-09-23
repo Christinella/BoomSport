@@ -2,9 +2,11 @@
 
 namespace src\Controllers;
 
-use src\Repositories\ProgramRepository;
 use src\Repositories\SportRepository;
-use src\Repositories\ProgramsRepository;
+use src\Repositories\ProgramRepository;
+
+
+
 
 class AdminController
 {
@@ -26,7 +28,7 @@ class AdminController
     {
         $programRepository = new ProgramRepository(); // Instancier SportRepository
         $programs =  $programRepository->getAllProgram(); // Récupérer les sports
-        
+       
         require_once __DIR__ . '/../Views/admin/programs/all_programs.php';
     }
 
