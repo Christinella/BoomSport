@@ -21,22 +21,23 @@ class UsersRepository
   }
 
 
-public function createUser($pseudonym, $email, $password, $isAdmin = false)
+public function createUser(Users $Users)
 {
-    try {
-        // Préparer la requête d'insertion
-        $stmt = $this->DB->prepare('INSERT INTO users (pseudonym, email, password, isAdmin) VALUES (:pseudonym, :email, :password, :isAdmin)');
-        $stmt->execute(array(
-            'pseudonym' => $pseudonym,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-            'isAdmin' => $isAdmin ? 1 : 0
-        ));
-        return true;
-    } catch (PDOException $e) {
-        echo "Error : " . $e->getMessage();
-        return false;
-    } 
+  $sql = "INSERT INTO " . "users (pseudonym, email, password, isAdmin) 
+  VALUES (:pseudonym, :email, :password, :isAdmin);";
+
+  $statement = $this->DB->prepare($sql);
+
+  $statement->execute([
+    ':pseudonym'                => $Users->getPseudonym(),
+    ':email'                    => $Users->getEmail(),
+    ':password'                 => $Users->getPassword(),
+    ':isAdmin'                  => $Users->getisAdmin()
+  ]);
+  $id_users = $this->DB->lastInsertId();
+  $Users->setID_User($id_users);
+
+  return $Users;
 }
 
 public function getUserByEmail($email){

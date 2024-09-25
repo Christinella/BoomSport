@@ -14,22 +14,22 @@ final class Exercise{
       return $this->ID_Exercise;
    }
    
-   public function setName(string $name): void
+   public function setName(?string $name): void
    {
       $this->name = $name;
    }
    
-   public function getDescription(): string
+   public function getDescription(): ?string
    {
       return $this->description;
    }
    
-   public function setDescription(string $description): void
+   public function setDescription(?string $description): void
    {
       $this->description = $description;
    }
    
-   public function getImage(): string
+   public function getImage(): ?string
    {
       return $this->image;
    }

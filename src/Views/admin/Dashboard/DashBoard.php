@@ -26,7 +26,7 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="allexercice">
+                            <a class="nav-link" href="<?= HOME_URL .'admin/allexercises' ?>">
                                 <span data-feather="list"></span>
                                 Exercices
                             </a>

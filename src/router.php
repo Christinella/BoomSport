@@ -50,13 +50,7 @@ switch ($route) {
             $sportController->displayFormAddSport();
         }
         break;
-        case HOME_URL . 'admin/editsport':
-            if ($methode === 'POST') {
-                $sportController->editSport();
-            } else {
-                $sportController->displayFormEditSport();
-            }
-            break;
+    
              // Page Programme admin
             case HOME_URL . 'admin/allprograms':
                 $adminController->allProgram();
@@ -69,8 +63,15 @@ switch ($route) {
                     }
                     break;
                 // Page Exercise admin 
-                case HOME_URL . 'admin/allprograms':
-                    $adminController->allProgram();
+                case HOME_URL . 'admin/allexercises':
+                    $adminController->allexercises();
+                    break;
+                case HOME_URL . 'admin/addexercise':
+                    if ($methode === 'POST') {
+                    $exerciseController->addExercise();
+                    } else {
+                    $exerciseController->displayFormAddExercice()();
+                    }
                     break;
 
     case HOME_URL . 'deconnexion':

@@ -19,27 +19,27 @@ class Users
     {
         return $this->ID_User;
     }
-    public function getPseudonym() : string
+    public function getPseudonym() : ?string
     {
         return $this->Pseudonym;
     }
-    public function setPseudonym() : string
+    public function setPseudonym() : ?string
     {
         return $this->Pseudonym;
     }
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->Email;
     }
-    public function setEmail() : string
+    public function setEmail() : ?string
     {
         return $this->Email;
     }
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->Password;
     }
-    public function setPassword() : string
+    public function setPassword() : ?string
     {
         return $this->Password;
     }

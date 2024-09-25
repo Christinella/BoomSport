@@ -18,22 +18,30 @@ class SportRepository
 
         require_once __DIR__ . '/../../config.php';
     }
-    public function createSport($name, $image, $description)
-{
-    try {
-        // Préparer la requête d'insertion
-        $stmt = $this->DB->prepare('INSERT INTO sport (name, image, description) VALUES (:name, :image, :description)');
-        $stmt->execute(array(
-            'name' => $name,
-            'image' => $image,
-            'description' => $description,
-        ));
-        return true;
-    } catch (PDOException $e) {
-        echo "Error : " . $e->getMessage();
-        return false;
-    }   
-}
+    public function createSport(Sport $Sport) : Sport
+    {
+        $sql = "INSERT INTO sport (name, image, description) 
+        VALUES (:name, :image, :description);";
+
+        $statement = $this->DB->prepare($sql);
+        
+        $statement->execute([
+            ':name'               => $Sport->getName(),
+            ':image'              => $Sport->getImage(),
+            ':description'        => $Sport->getDescription(),
+          
+        ]);
+
+        $idSport = $this->DB->lastInsertId();
+        $Sport->setID_Sport($idSport);
+    
+        return $Sport;
+
+
+
+    }
+  
+
 
 
 public function getAllSports(){

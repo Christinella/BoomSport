@@ -27,6 +27,7 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
                         <input type="text" id="image" name="image" class="form-control" required>
                     </div>
 
+
                     <!-- Sport Selection Dropdown -->
                     <div class="mb-3">
                         <label for="ID_sport" class="form-label">Sélectionner un sport</label>

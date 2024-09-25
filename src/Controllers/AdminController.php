@@ -31,6 +31,10 @@ class AdminController
        
         require_once __DIR__ . '/../Views/admin/programs/all_programs.php';
     }
+    public function allexercises(){
+        require_once __DIR__ . '/../Views/admin/exercises/all_exercises.php';
+    }
+    
 
     public function displayHomeAdmin()
     {
