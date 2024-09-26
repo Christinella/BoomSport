@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use src\Models\Sport;
 use src\Models\Database;
-
+use src\Models\Exercise;
 
 class SportRepository
 {
@@ -18,24 +18,30 @@ class SportRepository
 
         require_once __DIR__ . '/../../config.php';
     }
-    public function createExercise($name, $image, $description, $serie, $ID_Program)
-{
-    try {
+    
+    public function createExercise(exercise $exercise) : Exercise
+    {
+        try {
         // Préparer la requête d'insertion
-        $stmt = $this->DB->prepare('INSERT INTO sport (name, image, description) VALUES (:name, :image, :description)');
-        $stmt->execute(array(
-            'name' => $name,
-            'image' => $image,
-            'description' => $description,
-            'ID_Program' => $ID_Program,
-           'serie' => $serie,
-        ));
-        return true;
+        $sql = "INSERT INTO exericse (name, image, description, serie, ID_Program) 
+        VALUES (:name, :image, :ID_Program, :serie, :description);";
+        
+        $statement = $this->DB->prepare($sql);
+        
+        $statement->execute([
+            ':name'               => $exercise->getName(),
+            ':image'              => $exercise->getImage(),
+            ':ID_Program'         => $exercise->getID_Program(),
+            ':serie'              => $exercise->getSerie(),
+            ':description'        => $exercise->getDescription(),
+          
+        ]);
+        return $this->DB->lastInsertId();
     } catch (PDOException $e) {
-        echo "Error : " . $e->getMessage();
+        echo $e->getMessage();
         return false;
-    }   
-}
+    }
+    }
 
 
 public function getAllExercise(){

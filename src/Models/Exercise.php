@@ -13,6 +13,10 @@ final class Exercise{
    {
       return $this->ID_Exercise;
    }
+   public function getName(): ?string
+   {
+      return $this->name;
+   }
    
    public function setName(?string $name): void
    {
@@ -52,5 +56,11 @@ final class Exercise{
    public function getID_Program(): int
    {
       return $this->ID_Program;
-    }
+   }
+
+   public function setID_Program(int $ID_Program): void
+   {
+      $this->ID_Program = $ID_Program;
+   }
+
 }
