@@ -12,6 +12,7 @@ class UsersRepository
 {
   private $DB;
 
+
   public function __construct()
   {
     $database = new Database;
@@ -44,7 +45,10 @@ public function getUserByEmail($email){
   try {
     $stmt = $this->DB->prepare('SELECT * FROM users WHERE email = :email');
     $stmt->execute(array('email' => $email));
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, Users::class);
+    $user = $stmt->fetch();
+   
+  return $user;
   } catch (PDOException $e) {
     echo "Error : ". $e->getMessage();
   }

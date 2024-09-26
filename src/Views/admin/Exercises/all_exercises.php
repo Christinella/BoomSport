@@ -48,5 +48,5 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
         <?php endif; ?>
     </div>
 
-    <a href="<?= HOME_URL . 'admin/addprogram' ?>" class="btn btn-primary">Créer un nouveau exercice</a>
+    <a href="<?= HOME_URL . 'admin/addexercise' ?>" class="btn btn-primary">Créer un nouveau exercice</a>
 </main>

@@ -7,7 +7,7 @@ use src\Services\Hydratation;
 
 class Users
 {
-    private $ID_User , $Pseudonym, $Email, $Password, $isAdmin ;
+    private $ID_User , $pseudonym, $email, $password, $isAdmin;
 
     use Hydratation;
 
@@ -21,27 +21,27 @@ class Users
     }
     public function getPseudonym() : ?string
     {
-        return $this->Pseudonym;
+        return $this->pseudonym;
     }
     public function setPseudonym() : ?string
     {
-        return $this->Pseudonym;
+        return $this->pseudonym;
     }
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
     public function setEmail() : ?string
     {
-        return $this->Email;
+        return $this->email;
     }
     public function getPassword(): ?string
     {
-        return $this->Password;
+        return $this->password;
     }
     public function setPassword() : ?string
     {
-        return $this->Password;
+        return $this->password;
     }
     public function getisAdmin(): bool
     {

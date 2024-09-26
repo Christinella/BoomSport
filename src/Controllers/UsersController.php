@@ -2,8 +2,7 @@
 
 namespace src\Controllers;
 
-USE FFI\Exception;
-// use Exception;
+use Exception;
 use src\Models\Users;
 use src\Repositories\UsersRepository;
 
@@ -47,42 +46,54 @@ class UsersController
         }
     }
 
-    // public function login()
-    // {
-    //     try{
-    //         $user = new Users();
-    //         $user->setEmail(isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null);
-    //         $user->setPassword(isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null);  
-        
-    //         if (empty($user->getEmail()) || empty($user->getPassword())) {
-    //             throw new \Exception('Tous les champs sont obligatoires.');
-    //         }
-    //         $userBDD = $this->userRepository->getUserByEmail($user->getEmail());
+    public function login()
+{
+    try {
+        $user = new Users();
     
-    //         if ($userBDD){
-    //             throw new \Exception('Email ou mot de passe incorrect.');
-    //         }
-            
-    //         if (!password_verify($utilisateur->getPassword(), $userBDD->getPassword())) {
-    //             throw new Exception("Le mail ou le mot de passe est incorrect.");
-    //         }
-    // //         $_SESSION['ID_User'] = $user->getID_User();
-    // //         $_SESSION['Pseudonym'] = $user->getPseudonym();
-    // //         $_SESSION['Email'] = $user->getEmail();
-    // //         $_SESSION['isAdmin'] = $user->getisAdmin();
-    // //         $_SESSION['connecte'] = true;
+        $userEmail = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null;
+        $userPassword = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
+        
+        if (empty($userEmail) || empty($userPassword)) {
+            throw new \Exception('Tous les champs sont obligatoires.');
+    
+        }
+        $userRepository =new UsersRepository;
+        $userBDD = $userRepository->getUserByEmail($userEmail);
+      
+        if (!$userBDD || !$userBDD instanceof Users) {
+            throw new \Exception('Email ou mot de passe incorrect.');
+        }
 
-    // //     if ($user['isAdmin'] ===1){
-    // //         $_SESSION['adminConnecte'] = true;
-    // //         header('Location: '.HOME_URL.'admin?sucess=' . urlencode('Vous êtes connectée'));
-    // //     }else{
-    // //         header('Location: '.HOME_URL.'sport');
-    // //         exit();
-    // //     } catch (Exception $e) {
-    // //     header('Location:' . HOME_URL . 'connexion?error=' . urlencode($e->getMessage()));
-    // //     exit();
-    // //     }
-    // // }
-    //     }
-    // }
+        if (!password_verify($userPassword, $userBDD->getPassword())) {
+            throw new \Exception("Le mail ou le mot de passe est incorrect.");
+        }
+
+        
+        $_SESSION['ID_User'] = $userBDD->getID_User();  
+        $_SESSION['Pseudonym'] = $userBDD->getPseudonym();  
+        $_SESSION['Email'] = $userBDD->getEmail();
+        $_SESSION['isAdmin'] = $userBDD->getisAdmin();
+        $_SESSION['connecte'] = true;
+
+   
+        if ($userBDD->getisAdmin() === 1) {  
+            $_SESSION['adminConnecte'] = true;
+            header('Location: ' . HOME_URL . 'admin?success=' . urlencode('Vous êtes connecté.'));
+        } else {
+            header('Location: ' . HOME_URL . 'admin');
+        }
+        exit();  
+    } catch (Exception $e) {
+      
+        header('Location:' . HOME_URL . 'connexion?error=' . urlencode($e->getMessage()));
+        exit();
+    }
 }
+}
+   
+    
+    
+         
+
+  

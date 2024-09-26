@@ -5,12 +5,16 @@ use src\Controllers\AdminController;
 use src\Controllers\SportController;
 use src\Controllers\UsersController;
 use src\Controllers\ProgramController;
+use src\Controllers\ExerciseController;
+
 
 $homeController = new HomeController;
 $userController = new UsersController;
 $adminController = new AdminController;
 $sportController = new SportController;
 $programController = new ProgramController;
+// $exerciseController = new ExerciseController;
+
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -63,16 +67,16 @@ switch ($route) {
                     }
                     break;
                 // Page Exercise admin 
-                case HOME_URL . 'admin/allexercises':
-                    $adminController->allexercises();
-                    break;
-                case HOME_URL . 'admin/addexercise':
-                    if ($methode === 'POST') {
-                    $exerciseController->addExercise();
-                    } else {
-                    $exerciseController->displayFormAddExercice()();
-                    }
-                    break;
+    // case HOME_URL . 'admin/allexercises':
+    //     $adminController->allexercises();
+    //     break;
+    // case HOME_URL . 'admin/addexercise':
+    //     if ($methode === 'POST') {
+    //     $exerciseController->addExercise();
+    //     } else {
+    //     $exerciseController->displayFormAddExercice()();
+    //     }
+    //     break;
 
     case HOME_URL . 'deconnexion':
         $homeController->logout();
