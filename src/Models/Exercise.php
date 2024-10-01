@@ -6,12 +6,16 @@ use src\Services\Hydratation;
 
 
 final class Exercise{
-   private $ID_Exercise, $name, $description, $image,$serie, $ID_Program;
+   private $ID_Exercise, $name, $description, $image, $serie, $ID_Program;
    use Hydratation;
 
    public function getID_Exercise(): int
    {
       return $this->ID_Exercise;
+   }
+   public function setID_Exercise(int $ID_Exercise): void
+   {
+      $this->ID_Exercise = $ID_Exercise;
    }
    public function getName(): ?string
    {

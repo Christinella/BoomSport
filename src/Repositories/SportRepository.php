@@ -36,13 +36,29 @@ class SportRepository
         $Sport->setID_Sport($idSport);
     
         return $Sport;
+}
+public function updateSport(Sport $sport) 
+{
+    $sql = "UPDATE sport 
+            SET name = :name, 
+            description = :description, 
+            image = :image 
+            WHERE id_sport = :id_sport";
+    
+    $statement = $this->DB->prepare($sql);
 
-
-
-    }
   
+        return $statement->execute([
+            ':name'        => $sport->getName(),
+            ':description' => $sport->getDescription(),
+            ':image'       => $sport->getImage(),
+            ':id_sport'    => $sport->getID_Sport()
+        ]);
 
+            return $success;
+    }
 
+  
 
 public function getAllSports(){
     try {
@@ -53,15 +69,7 @@ public function getAllSports(){
     }
 }
 
-// public function getUserByEmail($email){
-//   try {
-//     $stmt = $this->DB->prepare('SELECT * FROM users WHERE email = :email');
-//     $stmt->execute(array('email' => $email));
-//     return $stmt->fetch(PDO::FETCH_ASSOC);
-//   } catch (PDOException $e) {
-//     echo "Error : ". $e->getMessage();
-//   }
-// }
+
 }
   
   

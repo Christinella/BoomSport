@@ -4,7 +4,6 @@ namespace src\Repositories;
 
 use PDO;
 use PDOException;
-use src\Models\Sport;
 use src\Models\Program;
 use src\Models\Database;
 
@@ -20,7 +19,7 @@ class ProgramRepository
     }
     public function createProgram(program $program) : Program
     {
-        try {
+      
             // Préparer la requête d'insertion
             $sql = "INSERT INTO program (name, image, ID_Sport) 
         VALUES (:name, :image, :ID_Sport);";
@@ -30,14 +29,13 @@ class ProgramRepository
             $statement->execute([
                 ':name'               => $program->getName(),
                 ':image'              => $program->getImage(),
-                ':ID_Sport'        => $program->getID_Sport(),
+                ':ID_Sport'            => $program->getID_Sport(),
               
             ]);
-            return $this->DB->lastInsertId();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
+            $id_program = $this->DB->lastInsertId();
+            $program->setID_Program($id_program);
+          
+            return $program;
     }
     public function getAllProgram(){
         try {
@@ -45,6 +43,6 @@ class ProgramRepository
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error : ". $e->getMessage();
+            }
         }
-    }
 }

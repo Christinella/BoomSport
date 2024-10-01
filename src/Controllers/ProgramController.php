@@ -18,16 +18,17 @@ class ProgramController
     }
 
     public function addProgram()
-    {
+    {  
         try {
             // Create a new Program object
             $program = new Program();
             $program->setName(isset($_POST['name']) ? htmlspecialchars($_POST['name']) : null);
-            $program->setID_Sport(isset($_POST['ID_Sport']) ? intval($_POST['ID_Sport']) : null);
+            $program->setID_Sport(isset($_POST['ID_sport']) ? intval($_POST['ID_sport']) : null);
             $program->setImage(isset($_POST['image']) ? htmlspecialchars($_POST['image']) : null);
 
             // Ensure required fields are provided
             if (empty($program->getName()) || empty($program->getImage()) || empty($program->getID_Sport())) {
+               
                 throw new \Exception('Tous les champs sont obligatoires.');
             }
 

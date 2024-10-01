@@ -19,8 +19,8 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
 </div>
 
     <div class="row">
-        <?php if (!empty($exercises)): ?>
-            <?php foreach ($exercises as $exercise): ?>
+        <?php if (!empty($exercices)):;?>
+            <?php foreach ($exercices as $exercise): ?>
                 <div class="col-12 col-sm-6 col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-header">
@@ -29,7 +29,7 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                             
-                                <li class="list-group-item">Image : <img src="<?php echo $exercise['image'];?>" alt="<?php echo htmlspecialchars($program['name']);?>" class="img-fluid"></li>
+                                <li class="list-group-item">Image : <img src="<?php echo $exercise['image'];?>" alt="<?php echo htmlspecialchars($exercise['name']);?>" class="img-fluid"></li>
                                 <li class="list-group-item">Description : <?php echo htmlspecialchars($exercise['description']); ?></li>
                                 <li class="list-group-item">Serie : <?php echo htmlspecialchars($exercise['serie']); ?></li>
                             </ul>

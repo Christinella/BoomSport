@@ -2,6 +2,7 @@
 
 namespace src\Controllers;
 
+use Exception;
 use src\Models\Sport;
 use src\Repositories\SportRepository;
 
@@ -12,7 +13,7 @@ class SportController
         require_once __DIR__ . '/../Views/admin/sports/add_sport.php';
     }
 
-    public function displayFormEditSport()
+    public function displayFormUptadeSport()
     {
         require_once __DIR__ . '/../Views/admin/sports/edit_sport.php';
     }
@@ -58,42 +59,40 @@ class SportController
         }
     }
 
-
+    public function updateSport()
+    {
+        try {
+            // Vérifier si les données du formulaire ont été soumises
+            if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['image'])) {
+                // Instancier un objet Sport
+                $sport = new Sport();
+                
+                // Assigner les valeurs du formulaire à l'objet Sport
+                $sport->setID_Sport(intval($_POST['ID_Sport'])); // Assurez-vous que l'ID est bien un entier
+                $sport->setName(htmlspecialchars($_POST['name'])); // Protection contre XSS
+                $sport->setDescription(htmlspecialchars($_POST['description']));
+                $sport->setImage(htmlspecialchars($_POST['image']));
+                
+                // Instancier le repository pour gérer la mise à jour
+                $sportRepository = new SportRepository();
+                
+                // Appeler la méthode updateSport() dans le repository
+                $isUpdated = $sportRepository->updateSport($sport);
+                
+                if ($isUpdated) {
+                    // Redirection en cas de succès
+                    header('Location: ' . HOME_URL . 'admin/allsports?success=' . urlencode('Le sport a bien été modifié.'));
+                    exit();
+                } else {
+                    throw new Exception('La mise à jour a échoué.');
+                }
+            } else {
+                throw new Exception('Tous les champs sont obligatoires.');
+            }
+        } catch (Exception $e) {
+            // En cas d'erreur, redirection vers la page d'édition avec le message d'erreur
+            header('Location: ' . HOME_URL . 'admin/editsport?id=' . $_POST['id'] . '&error=' . urlencode($e->getMessage()));
+            exit();
+        }
     }
-    // public function editSport()
-    // {
-    //     try {
-    //         $name = htmlspecialchars($_POST['name']);
-    //         $description = htmlspecialchars($_POST['description']); // Sécuriser la description
-    //         $image = $_POST['image'];
-    
-    //         // Vérifier si tous les champs sont remplis
-    //         if (empty($name) || empty($description) || empty($image)) {
-    //             throw new \Exception('Tous les champs sont obligatoires.');
-    //         }
-    
-    //         // Vérifier la longueur du nom
-    //         if (strlen($name) < 3 || strlen($name) > 20) {
-    //             throw new \Exception('Le nom du sport doit contenir entre 3 et 20 caractères.');
-    //         }
-    
-    //         // Vérifier si l'image est une URL valide
-    //         if (!filter_var($image, FILTER_VALIDATE_URL)) {
-    //             throw new \Exception('L\'image doit être une URL valide.');
-    //         }
-    
-    //         // Sauvegarder les informations du sport
-    //         $sportRepository = new SportRepository();
-    //         $sportRepository->createSport($name, $image, $description);
-    
-    //         // Redirection en cas de succès
-    //         header('Location: ' . HOME_URL . 'admin/allsports?success=Le sport a bien été modifié.');
-    //         exit; // Terminer le script après redirection
-    //     } catch (\Exception $e) {
-    //         // Redirection en cas d'erreur
-    //         header('Location: ' . HOME_URL . 'admin/editsport?error=' . urlencode($e->getMessage()));
-    //         exit; // Terminer le script après redirection
-    //     }
-    // }
-    
-
+}
