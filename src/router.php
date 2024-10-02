@@ -77,7 +77,12 @@ switch ($route) {
             $exerciseController->displayFormAddExercice();
         }
         break;
-
+        case HOME_URL . 'dashboard':
+            $userController->displayHomeUser();
+            break;
+            case HOME_URL . 'createWeek':
+                $userController->createWeek();
+                break;
 
     case HOME_URL . 'deconnexion':
         $homeController->logout();

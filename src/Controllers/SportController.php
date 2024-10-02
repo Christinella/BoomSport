@@ -43,10 +43,8 @@ class SportController
                 throw new \Exception('L\'image doit être une URL valide.');
             }
 
-            // Create a new instance of SportRepository
+           
             $sportRepository = new SportRepository();
-            
-            // Pass the whole Sport object to createSport()
             $sportRepository->createSport($sport);
 
             // Redirect to success page
@@ -62,25 +60,24 @@ class SportController
     public function updateSport()
     {
         try {
-            // Vérifier si les données du formulaire ont été soumises
+           
             if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['image'])) {
-                // Instancier un objet Sport
+             
                 $sport = new Sport();
-                
-                // Assigner les valeurs du formulaire à l'objet Sport
+           
                 $sport->setID_Sport(intval($_POST['ID_Sport'])); // Assurez-vous que l'ID est bien un entier
                 $sport->setName(htmlspecialchars($_POST['name'])); // Protection contre XSS
                 $sport->setDescription(htmlspecialchars($_POST['description']));
                 $sport->setImage(htmlspecialchars($_POST['image']));
                 
-                // Instancier le repository pour gérer la mise à jour
+                
                 $sportRepository = new SportRepository();
                 
-                // Appeler la méthode updateSport() dans le repository
+              
                 $isUpdated = $sportRepository->updateSport($sport);
                 
                 if ($isUpdated) {
-                    // Redirection en cas de succès
+               
                     header('Location: ' . HOME_URL . 'admin/allsports?success=' . urlencode('Le sport a bien été modifié.'));
                     exit();
                 } else {
@@ -90,9 +87,15 @@ class SportController
                 throw new Exception('Tous les champs sont obligatoires.');
             }
         } catch (Exception $e) {
-            // En cas d'erreur, redirection vers la page d'édition avec le message d'erreur
+          
             header('Location: ' . HOME_URL . 'admin/editsport?id=' . $_POST['id'] . '&error=' . urlencode($e->getMessage()));
             exit();
         }
     }
+}
+function deleteSport($id) {
+    $sportRepository = new SportRepository();
+    $sportRepository->deleteSport($id);
+    header('Location: ' . HOME_URL. 'admin/allsports?success=' . urlencode('Le sport a bien été supprimé.'));
+    exit();
 }

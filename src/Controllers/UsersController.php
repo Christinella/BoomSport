@@ -4,11 +4,25 @@ namespace src\Controllers;
 
 use Exception;
 use src\Models\Users;
+use src\Repositories\SportRepository;
 use src\Repositories\UsersRepository;
+use src\Repositories\ProgramRepository;
+use src\Repositories\ExerciseRepository;
 
 
 class UsersController
 {
+    public function createWeek(){
+        $sportRepository = new SportRepository();
+        $sports = $sportRepository->getAllSports();
+        $programRepository = new ProgramRepository();
+        $programs = $programRepository->getAllProgram();
+        $exerciseRepository = new ExerciseRepository();
+        $exercises = $exerciseRepository-> getAllExercises();
+        
+       
+        require_once __DIR__ . '/../Views/User/createWeek/createWeek.php';
+    }
 
     public function createUser(){
         try{
@@ -81,7 +95,7 @@ class UsersController
             $_SESSION['adminConnecte'] = true;
             header('Location: ' . HOME_URL . 'admin?success=' . urlencode('Vous êtes connecté.'));
         } else {
-            header('Location: ' . HOME_URL . 'admin');
+            header('Location: ' . HOME_URL . 'dashboard');
         }
         exit();  
     } catch (Exception $e) {
@@ -90,6 +104,11 @@ class UsersController
         exit();
     }
 }
+public function displayHomeUser()
+{
+    include_once __DIR__ . '/../Views/User/dashboard.php';
+}
+
 }
    
     

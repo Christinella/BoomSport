@@ -57,7 +57,11 @@ public function updateSport(Sport $sport)
 
             return $success;
     }
-
+public function deleteSport($sport){
+    $sql = "DELETE FROM sport WHERE id_sport = :id_sport";
+    $statement = $this->DB->prepare($sql);
+    return $statement->execute([':id_sport' => $sport]);  
+}
   
 
 public function getAllSports(){
