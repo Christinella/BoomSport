@@ -32,9 +32,7 @@ class UsersController
             $users->setPassword(isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null);
             $isAdmin = false;
 
-            // Vérification des données entrées
-
-            // Hashage du mot de passe
+          
 
             if (empty($users->getPseudonym()) ||empty($users->getEmail()) || empty($users->getPassword())) {
                 throw new \Exception('Tous les champs sont obligatoires.');
@@ -44,12 +42,11 @@ class UsersController
             }
         
 
-            // Insertion des données dans la base de données
-            //...
+        
            $userRepository = new UsersRepository();
             $userRepository->createUser($users , $isAdmin);
 
-            // Redirection vers la page de connexion
+ 
             $success = "Votre compte a bien été créé.";
             include __DIR__ . '/../Views/connexion.php';
             exit;
@@ -60,6 +57,7 @@ class UsersController
         }
     }
 
+
     public function login()
 {
     try {
@@ -68,10 +66,10 @@ class UsersController
         $userEmail = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null;
         $userPassword = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
         
-        if (empty($userEmail) || empty($userPassword)) {
+        if (empty(trim($userEmail)) || empty(trim($userPassword))) {
             throw new \Exception('Tous les champs sont obligatoires.');
-    
         }
+        
         $userRepository =new UsersRepository;
         $userBDD = $userRepository->getUserByEmail($userEmail);
       
@@ -88,22 +86,25 @@ class UsersController
         $_SESSION['Pseudonym'] = $userBDD->getPseudonym();  
         $_SESSION['Email'] = $userBDD->getEmail();
         $_SESSION['isAdmin'] = $userBDD->getisAdmin();
-        $_SESSION['connecte'] = true;
+   
 
    
-        if ($userBDD->getisAdmin() === 1) {  
+        if ($userBDD->getisAdmin() == true) {  
             $_SESSION['adminConnecte'] = true;
-            header('Location: ' . HOME_URL . 'admin?success=' . urlencode('Vous êtes connecté.'));
-        } else {
-            header('Location: ' . HOME_URL . 'dashboard');
+            include __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';
+        } elseif ($userBDD->getisAdmin() == false){
+            $_SESSION['connecte'] = true;
+            include __DIR__ . '/../Views/User/dashboard.php';
         }
         exit();  
-    } catch (Exception $e) {
-      
-        header('Location:' . HOME_URL . 'connexion?error=' . urlencode($e->getMessage()));
+    } catch (\Exception $e) {
+
+        $error = $e->getMessage();
+        include __DIR__ . '/../Views/connexion.php';
         exit();
     }
 }
+    
 public function displayHomeUser()
 {
     include_once __DIR__ . '/../Views/User/dashboard.php';

@@ -1,6 +1,9 @@
 <?php
 
 include_once __DIR__ . "/../../Includes/navbarAdmin.php";
+
+use src\Repositories\SportRepository;
+
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -21,6 +24,7 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
     <div class="row">
         <?php if (!empty($sports)): ?>
             <?php foreach ($sports as $sport): ?>
+                
                 <div class="col-12 col-sm-6 col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-header">
@@ -33,7 +37,11 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
                                 <li class="list-group-item">Description : <?php echo htmlspecialchars($sport['description']); ?></li>
                             </ul>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <a href="<?php echo HOME_URL . 'admin/editsport' . $sport['name']; ?>" class="btn btn-primary">Modifier</a>
+                            <a href="<?= HOME_URL . 'admin/editsport?name=' . urlencode($sport['name']) ?>" class="btn btn-primary">Modifier</a>
+
+                              
+                                
+                                
                                 <form action="<?php echo HOME_URL . 'admin/deletesport' . $sport['name']; ?>" method="post">
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>

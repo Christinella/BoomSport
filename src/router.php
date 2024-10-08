@@ -18,7 +18,7 @@ $exerciseController = new ExerciseController;
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
-// var_dump($_SERVER);die();
+
 switch ($route) {
     case HOME_URL:
         $homeController->displayHome();
@@ -41,7 +41,11 @@ switch ($route) {
         $homeController->displayApropos();
         break;
     case HOME_URL . 'admin':
-        $adminController->displayHomeAdmin();
+        if(isset($_SESSION['adminconnecte']) && $_SESSION['adminconnecte'] === true) {
+            $adminController->displayHomeAdmin();
+        }else{
+            $homeController->connexion();
+        }
         break;
     // Page Sport admin
         case HOME_URL . 'admin/allsports':
@@ -53,6 +57,21 @@ switch ($route) {
         } else {
             $sportController->displayFormAddSport();
         }
+        case HOME_URL . 'admin/editsport':
+            $name = isset($_GET['name']) ? $_GET['name'] : null; // Récupérer le nom du sport depuis l'URL
+        
+            if ($methode === 'POST') {
+                // Appeler la méthode pour mettre à jour le sport
+                $sportController->updateSport();
+            } else {
+                // Vérifier si le nom du sport est présent
+                if ($name !== null) {
+                    $sportController->displayFormUpdateSport($name); // Passer le nom pour afficher le bon sport
+                } else {
+                    echo "Nom du sport manquant."; // Gestion d'erreur simple
+                }
+            }
+            break;
         
     
              // Page Programme admin
@@ -78,7 +97,11 @@ switch ($route) {
         }
         break;
         case HOME_URL . 'dashboard':
-            $userController->displayHomeUser();
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']=== true) {
+                $userController->displayHomeUser();
+            }else{
+                $homeController->connexion();
+            }
             break;
             case HOME_URL . 'createWeek':
                 $userController->createWeek();

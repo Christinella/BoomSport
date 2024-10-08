@@ -18,7 +18,6 @@ include_once __DIR__ . "/../../Includes/navbarUser.php";
     </div>
 </div>
 
-<!-- Modale pour ajouter un programme -->
 <div id="modal" class="modal" style="display:none;">
     <div class="modal-content">
         <span class="close-button">&times;</span>

@@ -43,7 +43,7 @@ public function updateSport(Sport $sport)
             SET name = :name, 
             description = :description, 
             image = :image 
-            WHERE id_sport = :id_sport";
+            WHERE id_sport = :id_sport ";
     
     $statement = $this->DB->prepare($sql);
 
@@ -57,6 +57,16 @@ public function updateSport(Sport $sport)
 
             return $success;
     }
+  public function getSportByName($name)
+  {
+    $sql = "SELECT * FROM sport WHERE name = :name";
+    $statement = $this->DB->prepare($sql);
+    $statement->execute([':name' => $name]);
+    $statement->setFetchMode(PDO::FETCH_CLASS, Sport::class);
+    $sport = $statement->fetch();
+    return $sport;
+
+  }
 public function deleteSport($sport){
     $sql = "DELETE FROM sport WHERE id_sport = :id_sport";
     $statement = $this->DB->prepare($sql);

@@ -8,15 +8,49 @@ use src\Repositories\SportRepository;
 
 class SportController
 {
+    private  $SportRepository;
+    
+    public function __construct()
+    {
+        $this->SportRepository = new SportRepository();
+    }
     public function displayFormAddSport()
     {
         require_once __DIR__ . '/../Views/admin/sports/add_sport.php';
     }
 
-    public function displayFormUptadeSport()
-    {
-        require_once __DIR__ . '/../Views/admin/sports/edit_sport.php';
+  public function displayFormUpdateSport($name)
+{
+    try {
+        // Vérifier si le nom est vide
+        if (empty($name)) {
+            throw new Exception('Nom du sport invalide.');
+        }
+
+        // Récupérer le sport en utilisant son nom
+        $sport = $this->SportRepository->getSportByName($name);
+
+        // Vérifier si le sport a été trouvé
+        if (!$sport) {
+            throw new Exception('Sport non trouvé.');
+        }
+
+        // Inclure la vue pour afficher le formulaire de mise à jour du sport
+        include __DIR__ . '/../Views/admin/sports/edit_sport.php';
+
+    } catch (Exception $e) {
+        // En cas d'exception, afficher l'erreur dans la vue
+        $error = $e->getMessage();
+        include __DIR__ . '/../Views/admin/sports/edit_sport.php';
+        exit;
     }
+}
+
+    
+    
+    
+    
+    
 
     public function addSport()
     {
@@ -65,7 +99,8 @@ class SportController
              
                 $sport = new Sport();
            
-                $sport->setID_Sport(intval($_POST['ID_Sport'])); // Assurez-vous que l'ID est bien un entier
+                $sport->setID_Sport(intval($_POST['id'])); // Corrigez le nom ici
+                // Assurez-vous que l'ID est bien un entier
                 $sport->setName(htmlspecialchars($_POST['name'])); // Protection contre XSS
                 $sport->setDescription(htmlspecialchars($_POST['description']));
                 $sport->setImage(htmlspecialchars($_POST['image']));
