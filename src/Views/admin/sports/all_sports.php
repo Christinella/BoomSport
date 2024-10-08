@@ -37,15 +37,15 @@ use src\Repositories\SportRepository;
                                 <li class="list-group-item">Description : <?php echo htmlspecialchars($sport['description']); ?></li>
                             </ul>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                            <a href="<?= HOME_URL . 'admin/editsport?name=' . urlencode($sport['name']) ?>" class="btn btn-primary">Modifier</a>
+    <a href="<?= HOME_URL . 'admin/editsport?name=' . urlencode($sport['name']) ?>" class="btn btn-primary">Modifier</a>
 
-                              
-                                
-                                
-                                <form action="<?php echo HOME_URL . 'admin/deletesport' . $sport['name']; ?>" method="post">
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                                </form>
-                            </div>
+    <form action="<?php echo HOME_URL . 'admin/allsports'; ?>" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+</form>
+
+
+</div>
+
                         </div>
                     </div>
                 </div>

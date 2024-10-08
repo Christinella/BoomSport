@@ -127,10 +127,16 @@ class SportController
             exit();
         }
     }
-}
-function deleteSport($id) {
-    $sportRepository = new SportRepository();
-    $sportRepository->deleteSport($id);
-    header('Location: ' . HOME_URL. 'admin/allsports?success=' . urlencode('Le sport a bien été supprimé.'));
-    exit();
+    public function deleteSport($id_sport) {
+        $sportRepository = new SportRepository();
+        
+        // Supprimer le sport via le repository
+        $sportRepository->deleteSport($id_sport);
+        
+        // Redirection après suppression avec un message de succès
+        header('Location: ' . HOME_URL . 'admin/allsports?success=' . urlencode('Le sport a bien été supprimé.'));
+        exit();
+    }
+    
+    
 }

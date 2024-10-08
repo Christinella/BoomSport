@@ -72,7 +72,16 @@ switch ($route) {
                 }
             }
             break;
-        
+            case HOME_URL . 'admin/deleteSport':
+                $id_sport = isset($_GET['id']) ? $_GET['id'] : null; // Utilisez l'ID du sport
+                if ($id_sport !== null) {
+                    $sportController->deleteSport($id_sport); // Appeler la méthode pour supprimer le sport
+                } else {
+                    echo "ID du sport manquant."; // Gestion d'erreur
+                }
+                break;
+            
+            
     
              // Page Programme admin
             case HOME_URL . 'admin/allprograms':
