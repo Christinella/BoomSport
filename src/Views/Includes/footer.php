@@ -24,7 +24,7 @@
         </div>
 
         <div class="mentions-legales">
-            <p>&copy; 2024 Votre Entreprise. Tous droits réservés.</p>
+            <p>&copy; 2024 BoumSport. Tous droits réservés.</p>
             <p><a href="/mentions-legales" style="color: #003366;">Mentions légales</a></p>
         </div>
  

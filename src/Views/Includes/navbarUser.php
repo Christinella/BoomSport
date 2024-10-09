@@ -25,6 +25,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<?= HOME_URL.'dashboard' ?>">Accueil</a>
                     </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="<?= HOME_URL .'createWeek' ?> ">
+                                <span data-feather="calendar"></span>
+                               Créer ta semaine
+                            </a>
+                        </li>
                 
                     <li class="nav-item">
                         <a class="nav-link" href="<?= HOME_URL  ?>">Déconnexion</a>

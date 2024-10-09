@@ -1,0 +1,22 @@
+.row {
+    margin-top: 50px; /* Espace entre le header et les cartes */
+}
+
+/* Style personnalisé pour les cartes */
+.small-card {
+    width: 300px; /* Largeur de la carte */
+    height: auto; /* Ajuster automatiquement la hauteur en fonction du contenu */
+}
+
+/* Centrer l'image et limiter sa taille */
+.small-card img {
+    max-height: 150px; /* Limiter la hauteur de l'image */
+    object-fit: cover; /* Adapter l'image à la taille tout en maintenant son ratio */
+    border-radius: 5%; /* Légèrement arrondir les coins de l'image */
+    display: block; /* S'assurer que l'image est traitée comme un élément de bloc */
+    margin-left: auto; /* Centrer l'image horizontalement */
+    margin-right: auto; /* Centrer l'image horizontalement */
+}
+.row justify-content-center{
+   margin-top: 2% !important ;
+}

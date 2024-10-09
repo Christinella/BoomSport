@@ -16,6 +16,14 @@ class ProgramController
         $sports = $sportRepository->getAllSports();
         require_once __DIR__ . '/../Views/admin/programs/add_program.php';
     }
+    // public function showAllProgram() {
+    //     // Récupérer tous les sports à l'aide du repository
+    //     $program = $this->ProgramRepository->getAllProgram();
+        
+    //     // Afficher la liste des sports dans la vue
+    //     require_once __DIR__. '/../Views/program.php';
+
+    // }
 
     public function addProgram()
     {  

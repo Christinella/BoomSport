@@ -41,15 +41,20 @@ switch ($route) {
         $homeController->displayApropos();
         break;
     case HOME_URL . 'sport':
-        $homeController->displayAllSport();
+        $sportController->showAllSport();
         break;
-    case HOME_URL . 'admin':
-        if(isset($_SESSION['adminconnecte']) && $_SESSION['adminconnecte'] === true) {
-            $adminController->displayHomeAdmin();
-        }else{
-            $homeController->connexion();
-        }
-        break;
+        // case HOME_URL . 'program':
+        //     $programController->showAllProgram();
+        //     break;
+        case HOME_URL . 'admin':
+            if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
+                $adminController->displayHomeAdmin();
+            } else {
+                $homeController->connexion();
+            }
+            break;
+        
+        
     // Page Sport admin
         case HOME_URL . 'admin/allsports':
         $adminController->allSport();
@@ -75,14 +80,7 @@ switch ($route) {
                 }
             }
             break;
-            case HOME_URL . 'admin/deleteSport':
-                $id_sport = isset($_GET['id']) ? $_GET['id'] : null; // Utilisez l'ID du sport
-                if ($id_sport !== null) {
-                    $sportController->deleteSport($id_sport); // Appeler la méthode pour supprimer le sport
-                } else {
-                    echo "ID du sport manquant."; // Gestion d'erreur
-                }
-                break;
+           
             
             
     
@@ -109,7 +107,7 @@ switch ($route) {
         }
         break;
         case HOME_URL . 'dashboard':
-            if(isset($_SESSION['connecte']) && $_SESSION['connecte']=== true) {
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']== true) {
                 $userController->displayHomeUser();
             }else{
                 $homeController->connexion();

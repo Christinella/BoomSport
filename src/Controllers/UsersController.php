@@ -105,16 +105,20 @@ public function createUser() {
         $_SESSION['Pseudonym'] = $userBDD->getPseudonym();  
         $_SESSION['Email'] = $userBDD->getEmail();
         $_SESSION['isAdmin'] = $userBDD->getisAdmin();
-   
+        $_SESSION['password'] = $userBDD->getPassword();
+ 
 
    
-        if ($userBDD->getisAdmin() == true) {  
-            $_SESSION['adminConnecte'] == 1;
-            include __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';
-        } elseif ($userBDD->getisAdmin() == 0){
-            $_SESSION['connecte'] = true;
-            include __DIR__ . '/../Views/User/dashboard.php';
-        }
+if ($userBDD->getisAdmin() == true) {  
+    $_SESSION['adminConnecte'] = true;  // Met à jour la session admin à true
+    $_SESSION['connecte'] = true;       // Enregistre la session connectée
+    include __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';  // Redirige vers le dashboard admin
+} else {
+    $_SESSION['adminConnecte'] = false;  // Si ce n'est pas un admin, adminConnecte est false
+    $_SESSION['connecte'] = true;        // La session utilisateur est connectée
+    include __DIR__ . '/../Views/User/dashboard.php';  // Redirige vers le dashboard utilisateur
+}
+
         exit();  
     } catch (\Exception $e) {
 
