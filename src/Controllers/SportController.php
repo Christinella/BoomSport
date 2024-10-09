@@ -127,6 +127,14 @@ class SportController
             exit();
         }
     }
+    public function showAllSport() {
+            // Récupérer tous les sports à l'aide du repository
+            $sports = $this->SportRepository->getAllSports();
+            
+            // Afficher la liste des sports dans la vue
+            require_once __DIR__. '/../Views/sport.php';
+    
+    }
     public function deleteSport($id_sport) {
         $sportRepository = new SportRepository();
         

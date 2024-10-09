@@ -21,6 +21,24 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<?= HOME_URL.'admin' ?>">Accueil</a>
                     </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="<?= HOME_URL .'admin/allsports' ?>">
+                                <span data-feather="activity"></span>
+                                Sports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= HOME_URL .'admin/allprograms' ?>">
+                                <span data-feather="calendar"></span>
+                                Programmes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= HOME_URL .'admin/allexercises' ?>">
+                                <span data-feather="list"></span>
+                                Exercices
+                            </a>
+                        </li>
                 
                     <li class="nav-item">
                         <a class="nav-link" href="<?= HOME_URL  ?>">Déconnexion</a>
@@ -29,3 +47,8 @@
             </div>
         </div>
     </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace(); // Pour activer les icônes
+    </script>

@@ -14,8 +14,8 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
             <div class="alert alert-success"><?php echo htmlspecialchars($_GET['success']); ?></div>
         <?php endif; ?>
     </div>
-    <div class="text-center mb-4">
-    <a href="<?= HOME_URL . 'admin' ?>" class="btn btn-secondary">Retour</a>
+
+
 </div>
 
     <div class="row">

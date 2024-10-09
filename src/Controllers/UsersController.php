@@ -24,39 +24,58 @@ class UsersController
         require_once __DIR__ . '/../Views/User/createWeek/createWeek.php';
     }
 
-    public function createUser(){
-        try{
-            $users = new Users();
-            $users->setPseudonym(isset($_POST['pseudonym']) ? htmlspecialchars($_POST['pseudonym']) : null);
-            $users->setEmail(isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null);
-            $users->setPassword(isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null);
-            $isAdmin = false;
+public function createUser() {
+    try {
+        $users = new Users();
 
-          
+        // Récupérer les valeurs du formulaire et les assigner à l'objet
+        $pseudonym = isset($_POST['pseudonym']) ? htmlspecialchars($_POST['pseudonym']) : null;
+        $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null;
+        $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
 
-            if (empty($users->getPseudonym()) ||empty($users->getEmail()) || empty($users->getPassword())) {
-                throw new \Exception('Tous les champs sont obligatoires.');
-            }
-            if(strlen($users->getPseudonym()) < 3 || strlen(($users->getPseudonym())) > 20){
-                throw new \Exception('Le pseudonyme doit contenir entre 3 et 20 caractères.');
-            }
-        
-
-        
-           $userRepository = new UsersRepository();
-            $userRepository->createUser($users , $isAdmin);
-
- 
-            $success = "Votre compte a bien été créé.";
-            include __DIR__ . '/../Views/connexion.php';
-            exit;
-        } catch (Exception $e) {
-            $error = $e->getMessage();
-            include __DIR__ . '/../Views/inscription.php';
-            exit;
+        // Vérifications
+        if (empty($pseudonym) || empty($email) || empty($password)) {
+            throw new \Exception('Tous les champs sont obligatoires.');
         }
-    }
+        if (strlen($pseudonym) < 3 || strlen($pseudonym) > 20) {
+            throw new \Exception('Le pseudonyme doit contenir entre 3 et 20 caractères.');
+        }
 
+        // Assignation des valeurs à l'objet Users
+        $users->setPseudonym($pseudonym);
+        $users->setEmail($email);
+
+        // Hachage du mot de passe
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $users->setPassword($hashedPassword);
+
+        $isAdmin = 0; // valeur par défaut pour isAdmin
+        $users->setisAdmin($isAdmin);
+        
+        // Insertion dans la base de données
+        $userRepository = new UsersRepository();
+        $userRepository->createUser($users);
+
+        // Stocker les informations de l'utilisateur dans la session
+        $_SESSION['ID_User'] = $users->getID_User();
+        $_SESSION['Pseudonym'] = $users->getPseudonym();
+        $_SESSION['Email'] = $users->getEmail();
+        $_SESSION['isAdmin'] = $users->getisAdmin();
+
+        $success = "Votre compte a bien été créé.";
+        include __DIR__ . '/../Views/connexion.php';  
+        exit;
+
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+        include __DIR__ . '/../Views/inscription.php';
+        exit;
+    }
+}
+
+    
+    
+    
 
     public function login()
 {
@@ -90,9 +109,9 @@ class UsersController
 
    
         if ($userBDD->getisAdmin() == true) {  
-            $_SESSION['adminConnecte'] = true;
+            $_SESSION['adminConnecte'] == 1;
             include __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';
-        } elseif ($userBDD->getisAdmin() == false){
+        } elseif ($userBDD->getisAdmin() == 0){
             $_SESSION['connecte'] = true;
             include __DIR__ . '/../Views/User/dashboard.php';
         }

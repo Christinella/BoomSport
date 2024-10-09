@@ -40,6 +40,9 @@ switch ($route) {
     case HOME_URL . 'apropos':
         $homeController->displayApropos();
         break;
+    case HOME_URL . 'sport':
+        $homeController->displayAllSport();
+        break;
     case HOME_URL . 'admin':
         if(isset($_SESSION['adminconnecte']) && $_SESSION['adminconnecte'] === true) {
             $adminController->displayHomeAdmin();

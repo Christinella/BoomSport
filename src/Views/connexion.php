@@ -1,6 +1,7 @@
 <?php
-
+include_once __DIR__ . '/Includes/navbar.php';
 include_once __DIR__ . '/Includes/header.php';
+
 ?>
 <?php
 
@@ -16,24 +17,26 @@ include_once __DIR__ . '/Includes/header.php';
         <div class="alert alert-success"><?php echo $_GET['success']; ?></div>
     <?php endif; ?>
 
-    <form action="<?= HOME_URL . 'connexion' ?>"  method="post">
-        <div>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-        </div>
+    <form action="<?= HOME_URL . 'connexion' ?>" method="post" class="w-50 mx-auto"> <!-- Centrer le formulaire avec une largeur de 50% -->
+    <div class="mb-3"> <!-- Ajoute un espacement entre les éléments -->
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" id="email" name="email" class="form-control"> <!-- Champ de même taille -->
+    </div>
 
-        <div>
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password">
-        </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe:</label>
+        <input type="password" id="password" name="password" class="form-control"> <!-- Champ de même taille -->
+    </div>
 
-        <div>
-            <a href="<?= HOME_URL . 'inscription' ?>">je n'ai pas de compte</a>
-        </div>
+    <div class="mb-3">
+        <a href="<?= HOME_URL . 'inscription' ?>">Je n'ai pas de compte</a>
+    </div>
 
-        <div>
-            <input type="submit" value="Se connecter">
-        </div>
-    </form>
+    <div>
+        <input type="submit" value="Se connecter" class="btn btn-primary w-100"> <!-- Bouton de la même taille -->
+    </div>
+</form>
+
+
 </div>
-
+<?php include_once __DIR__ . "/Includes/footer.php"; ?>

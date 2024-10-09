@@ -37,4 +37,7 @@ class HomeController
     {
         include_once __DIR__ . '/../Views/aPropos.php' ;
     }
+    public function displayAllSport(){
+        include_once __DIR__ . '/../Views/sport.php';
+    }
 }

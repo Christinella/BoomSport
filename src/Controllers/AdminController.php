@@ -3,6 +3,7 @@
 namespace src\Controllers;
 
 use src\Repositories\SportRepository;
+use src\Repositories\UsersRepository;
 use src\Repositories\ProgramRepository;
 
 
@@ -38,6 +39,22 @@ class AdminController
 
     public function displayHomeAdmin()
     {
-        include_once __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';
+        // Vérifier si l'utilisateur est connecté et est admin
+        if (isset($_SESSION['adminconnecte']) && $_SESSION['adminconnecte'] === true) 
+      {
+        var_dump($_SESSION);
+        die();
+            // Optionnel : récupérer les informations utilisateur si nécessaire
+            // $userId = $_SESSION['user_id'];
+            // $userRepository = new UsersRepository();
+            // $user = $userRepository->getUserById($userId);
+
+            // Inclure la vue du tableau de bord
+            include_once __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';
+        } else {
+            // Si non connecté, rediriger vers la page de connexion
+            header('Location: ' . HOME_URL . 'connexion');
+            exit;
+        }
     }
 }

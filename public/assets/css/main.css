@@ -4,7 +4,7 @@
 #entete {
     background-image: url(../Image/header.jpeg);
     background-size: cover;
-    height: 250px;
+    height: 200px;
     background-position: center;
     display: flex;
     justify-content: center; /* Centre les éléments horizontalement */
@@ -13,54 +13,120 @@
   }
   
   .logo {
-    width: 200px;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Permet de centrer l'image */
-  }
+    width: 100px;  /* Largeur de base sur appareils standard */
+    height: 100px; /* Hauteur de base sur appareils standard */
+    max-width: 50%; /* S'assure que l'image ne dépasse pas l'écran */
+    max-height: 50%; /* Ajuste automatiquement la hauteur */
+}
 
-  .container-blocs {
-    display: flex;
-    justify-content: space-between; /* Espace égal entre les blocs */
-    margin: 20px 50px; /* Espace autour des blocs */
-  }
-  
-  .bloc1 {
-    height: 400px;
-    background-image: url(../Image/sport.jpeg);
-    background-size: cover;
-    padding: 30px;
-    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
-  }
-  .bloc3 {
-    height: 400px;
-    background-image: url(../Image/bloc3.jpeg);
-    background-size: cover;
-    padding: 30px;
-    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
-  }
-  .bloc2 {
-    height: 300px;
-    margin-top: 7%;
-    background-image: url(../Image/jog.jpeg);
-    background-size: cover;
-    padding: 20px;
-    width: 20%; /* Chaque bloc prendra 30% de la largeur de la ligne */
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0, 0, 0); /* Effet d'ombre */
-  }
-  
-  .bloc:hover {
-    background-color: #e0e0e0; /* Changement de couleur au survol */
-  }
- 
+@media (max-width: 768px) {
+    .logo {
+        width: 150px;  /* Réduire la taille pour les tablettes */
+        height: 150px;
+    }
+}
 
- 
+@media (max-width: 576px) {
+    .logo {
+        width: 100px;  /* Réduire davantage pour les téléphones mobiles */
+        height: 100px;
+    }
+}
+.navbar{
+  background-color: #DCBCA4;
+  color: #003366;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+
+
+.login-container {
+  flex: 1; /* Permet au conteneur de login de prendre l'espace disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrer le contenu verticalement */
+  align-items: center; /* Centrer le contenu horizontalement */
+  gap: 10%;
+}
+
+.features {
+  background-color: #f8f9fa; /* Couleur de fond légère */
+  padding: 40px 20px; /* Espacement */
+  text-align: center; /* Centrer le texte */
+}
+
+.features h2 {
+  margin-bottom: 30px; /* Espacement en bas du titre */
+}
+
+.features-container {
+  display: flex; /* Utiliser Flexbox pour un alignement flexible */
+  flex-wrap: wrap; /* Permettre aux éléments de passer à la ligne */
+  justify-content: center; /* Centrer le contenu */
+  gap: 20px;
+}
+
+.feature {
+  background-color: white; /* Fond blanc pour les fonctionnalités */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 20px; /* Espacement à l'intérieur */
+  margin: 15px; /* Espacement entre les fonctionnalités */
+  width: 220px; /* Largeur fixe pour chaque fonctionnalité */
+  box-shadow: 0 2px 5px #DCBCA4; /* Ombre légère */
+  transition: transform 0.3s; /* Transition pour l'effet de survol */
+}
+
+.feature:hover {
+  transform: translateY(-5px); /* Légère élévation au survol */
+}
+
+.feature i {
+  font-size: 40px; /* Taille des icônes */
+  color: #007bff; /* Couleur des icônes */
+  margin-bottom: 15px; /* Espacement entre l'icône et le texte */
+}
+
+.feature h3 {
+  margin: 10px 0; /* Espacement autour du titre */
+  font-size: 20px; /* Taille du titre */
+}
+
+.feature p {
+  color: #666; /* Couleur du texte */
+}
+
+.feature a {
+  text-decoration: none; /* Supprime le soulignement du texte */
+  color: inherit; /* Garde la couleur du texte par défaut */
+}
+
+.feature:hover a {
+  color: inherit; /* S'assure que la couleur reste la même au survol */
+}
+/* Style pour le carrousel */
+.carousel-inner {
+    max-width: 600px; /* Largeur maximale pour le carrousel */
+    margin: auto; /* Centre le carrousel sur la page */
+}
+
+/* Ajustez la hauteur des images */
+.carousel-item img {
+    height: 300px; /* Hauteur d'image ajustée */
+    object-fit: cover; /* Assure que l'image couvre l'espace disponible */
+    border-radius: 5%;
+}
+
+/* Style pour le caption */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour le texte */
+    padding: 10px; /* Espacement autour du texte */
+    border-radius: 5px; /* Coins arrondis */
+}
+#bousportCarousel{
+  margin-top: 50px;
+  gap: 10px;
+}
