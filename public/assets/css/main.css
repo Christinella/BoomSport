@@ -117,7 +117,7 @@
 .carousel-item img {
     height: 300px; /* Hauteur d'image ajustée */
     object-fit: cover; /* Assure que l'image couvre l'espace disponible */
-    border-radius: 5%;
+    border-radius: 0;
 }
 
 /* Style pour le caption */

@@ -2,12 +2,12 @@
 
 use src\Controllers\HomeController;
 use src\Controllers\AdminController;
-use src\Controllers\ExerciseController;
+
 use src\Controllers\SportController;
 use src\Controllers\UsersController;
 use src\Controllers\ProgramController;
-
-
+use src\Controllers\CalendarController;
+use src\Controllers\ExerciseController;
 
 $homeController = new HomeController;
 $userController = new UsersController;
@@ -15,6 +15,8 @@ $adminController = new AdminController;
 $sportController = new SportController;
 $programController = new ProgramController;
 $exerciseController = new ExerciseController;
+// $calendarController = new CalendarController;
+
 
 $route = $_SERVER['REDIRECT_URL'];
 $methode = $_SERVER['REQUEST_METHOD'];
@@ -65,6 +67,7 @@ switch ($route) {
         } else {
             $sportController->displayFormAddSport();
         }
+        break;
         case HOME_URL . 'admin/editsport':
             $name = isset($_GET['name']) ? $_GET['name'] : null; // Récupérer le nom du sport depuis l'URL
         
@@ -81,9 +84,8 @@ switch ($route) {
             }
             break;
            
-            
-            
-    
+              
+
              // Page Programme admin
             case HOME_URL . 'admin/allprograms':
                 $adminController->allProgram();
@@ -107,21 +109,20 @@ switch ($route) {
         }
         break;
         case HOME_URL . 'dashboard':
-            if(isset($_SESSION['connecte']) && $_SESSION['connecte']== true) {
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']=== true) {
                 $userController->displayHomeUser();
             }else{
                 $homeController->connexion();
             }
             break;
             case HOME_URL . 'createWeek':
-                $userController->createWeek();
-                break;
+                $calendarController->addCalendar();
+            break;
 
     case HOME_URL . 'deconnexion':
         $homeController->logout();
-        header('Location: ' . HOME_URL);
         break;
     default:
-        # code...
+        echo "Page non trouvée.";
         break;
 }

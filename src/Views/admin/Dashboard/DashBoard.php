@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . "/../../Includes/navbarAdmin.php";
+include_once __DIR__ . "/../../Includes/navbar.php";
+
 ?>
 
 <body>

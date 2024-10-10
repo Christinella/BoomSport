@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . "/../../Includes/navbarAdmin.php";
+include_once __DIR__ . "/../../Includes/navbar.php";
 ?>
 
 <body>
@@ -35,4 +35,6 @@ include_once __DIR__ . "/../../Includes/navbarAdmin.php";
             </div>
         </div>
     </div>
-    <a href="<?= HOME_URL . 'admin/allsports' ?>">Retourner</a>
+    <div class="text-center my-4">
+                    <a href="<?= HOME_URL . 'admin/allsports' ?>" class="btn btn-secondary">Retourner</a>
+                </div>

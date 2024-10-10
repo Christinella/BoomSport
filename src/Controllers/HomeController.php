@@ -30,7 +30,6 @@ class HomeController
     {
         session_destroy();
        
-
         header('Location: '.HOME_URL.'?success=Déconnexion réussie! ') ;
     }
     public function displayApropos()

@@ -40,10 +40,9 @@ class AdminController
     public function displayHomeAdmin()
     {
         // Vérifier si l'utilisateur est connecté et est admin
-        if (isset($_SESSION['adminconnecte']) && $_SESSION['adminconnecte'] === true) 
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true) 
       {
-        var_dump($_SESSION);
-        die();
+        
             // Optionnel : récupérer les informations utilisateur si nécessaire
             // $userId = $_SESSION['user_id'];
             // $userRepository = new UsersRepository();

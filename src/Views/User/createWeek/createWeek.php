@@ -1,17 +1,16 @@
-
 <?php
-
-include_once __DIR__ . "/../../Includes/navbarUser.php";
+include_once __DIR__ . "/../../Includes/navbar.php";
 ?>
 <div class="container mt-5">
+    <h1 class="text-center mb-4">Planificateur de Semaine</h1>
     <div class="row week-planner justify-content-center">
         <?php 
         $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
         foreach ($jours as $jour): ?>
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="day">
+                <div class="day card shadow-sm text-center p-3">
                     <h2><?= $jour ?></h2>
-                    <button class="add-button" data-day="<?= $jour ?>">+</button>
+                    <button class="add-button btn btn-success" data-day="<?= $jour ?>">Ajouter +</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -21,8 +20,8 @@ include_once __DIR__ . "/../../Includes/navbarUser.php";
 <div id="modal" class="modal" style="display:none;">
     <div class="modal-content">
         <span class="close-button">&times;</span>
-        <h2>Fais ton jour <span id="modal-day"></span></h2>
-        <form id="activity-form">
+        <h2>Planifier pour <span id="modal-day"></span></h2>
+        <form id="activity-form" action="<?= HOME_URL . 'createWeek' ?>" method="post">
             <div class="mb-3">
                 <label for="ID_sport" class="form-label">Sélectionner un sport</label>
                 <select id="ID_sport" name="ID_sport" class="form-control" required>
@@ -33,18 +32,20 @@ include_once __DIR__ . "/../../Includes/navbarUser.php";
                 </select>
             </div>
 
-            <label for="ID_program" class="form-label">Sélectionner un programme</label>
+            <div class="mb-3">
+                <label for="ID_program" class="form-label">Sélectionner un programme</label>
                 <select id="ID_program" name="ID_program" class="form-control" required>
                     <option value="">Sélectionner un programme</option>
                     <?php foreach ($programs as $program): ?>
-                                <option value="<?= $program['ID_Program'] ?>"><?= htmlspecialchars($program['name']) ?></option>
-                            <?php endforeach; ?>
+                        <option value="<?= $program['ID_Program'] ?>"><?= htmlspecialchars($program['name']) ?></option>
+                    <?php endforeach; ?>
                 </select>
+            </div>
 
             <div class="mb-3">
-            <label for="ID_Exercise" class="form-label">Sélectionner un exercise</label>
+                <label for="ID_Exercise" class="form-label">Sélectionner un exercice</label>
                 <select id="ID_Exercise" name="ID_Exercise" class="form-control" required>
-                    <option value="">Sélectionner un exercise</option>
+                    <option value="">Sélectionner un exercice</option>
                     <?php foreach ( $exercises as $exercise): ?>
                         <option value="<?= $exercise['ID_Exercise'] ?>"><?= htmlspecialchars($exercise['name']) ?></option>
                     <?php endforeach; ?>
@@ -55,5 +56,4 @@ include_once __DIR__ . "/../../Includes/navbarUser.php";
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </form>
     </div>
-</div>
 </div>

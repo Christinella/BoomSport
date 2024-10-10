@@ -77,7 +77,7 @@ public function createUser() {
     
     
 
-    public function login()
+public function login()
 {
     try {
         $user = new Users();
@@ -89,7 +89,7 @@ public function createUser() {
             throw new \Exception('Tous les champs sont obligatoires.');
         }
         
-        $userRepository =new UsersRepository;
+        $userRepository = new UsersRepository;
         $userBDD = $userRepository->getUserByEmail($userEmail);
       
         if (!$userBDD || !$userBDD instanceof Users) {
@@ -100,33 +100,31 @@ public function createUser() {
             throw new \Exception("Le mail ou le mot de passe est incorrect.");
         }
 
-        
         $_SESSION['ID_User'] = $userBDD->getID_User();  
         $_SESSION['Pseudonym'] = $userBDD->getPseudonym();  
         $_SESSION['Email'] = $userBDD->getEmail();
         $_SESSION['isAdmin'] = $userBDD->getisAdmin();
-        $_SESSION['password'] = $userBDD->getPassword();
- 
+        // Ne pas stocker le mot de passe dans la session
 
-   
-if ($userBDD->getisAdmin() == true) {  
-    $_SESSION['adminConnecte'] = true;  // Met à jour la session admin à true
-    $_SESSION['connecte'] = true;       // Enregistre la session connectée
-    include __DIR__ . '/../Views/admin/Dashboard/DashBoard.php';  // Redirige vers le dashboard admin
-} else {
-    $_SESSION['adminConnecte'] = false;  // Si ce n'est pas un admin, adminConnecte est false
-    $_SESSION['connecte'] = true;        // La session utilisateur est connectée
-    include __DIR__ . '/../Views/User/dashboard.php';  // Redirige vers le dashboard utilisateur
-}
+        if ($_SESSION['isAdmin'] == 1) {  
+            $_SESSION['connecte'] = false;        
+            $_SESSION['adminConnecte'] = true; 
 
-        exit();  
+            header('Location: '.HOME_URL.'admin?success=connexionréussie!');
+        } else {
+            $_SESSION['adminConnecte'] = false; 
+
+            $_SESSION['connecte'] = true;        
+            header('Location: '.HOME_URL.'dashboard?success=connexion réussie!');
+        }
+        exit(); 
     } catch (\Exception $e) {
-
         $error = $e->getMessage();
-        include __DIR__ . '/../Views/connexion.php';
+        header('Location: '.HOME_URL.'connexion?error='.urlencode($error));
         exit();
     }
 }
+
     
 public function displayHomeUser()
 {

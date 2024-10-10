@@ -44,4 +44,22 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modal').style.display = 'none';
     });
 });
+document.querySelectorAll('.add-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const day = this.getAttribute('data-day');
+        document.getElementById('modal-day').textContent = day;
+        document.getElementById('day').value = day;
+        document.getElementById('modal').style.display = 'block';
+    });
+});
 
+document.querySelector('.close-button').addEventListener('click', function() {
+    document.getElementById('modal').style.display = 'none';
+});
+
+// Ajoutez ici les fonctions pour mettre à jour les programmes et les exercices selon le sport sélectionné
+document.getElementById('ID_sport').addEventListener('change', function() {
+    const sportId = this.value;
+    
+    // Logique pour mettre à jour les programmes et exercices en fonction de sportId
+});
