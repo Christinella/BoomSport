@@ -9,7 +9,7 @@ include_once __DIR__ . '/Includes/header.php';
 ?>
 <div class="login-container">
     <h2>Connexion</h2>
-    <?php var_dump($_SESSION); ?>
+
 
     <?php if (isset($_GET['error'])): ?>
         <div class="alert alert-danger"><?php echo $_GET['error']; ?></div>

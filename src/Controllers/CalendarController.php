@@ -3,43 +3,56 @@
 namespace src\Controllers;
 
 use Exception;
+use src\Models\Program;
 use src\Models\Calendar;
+use src\Repositories\ProgramRepository;
 use src\Repositories\CalendarRepository;
 
 
 class CalendarController {
-    private $calendarRepository;
-
-    public function __construct(CalendarRepository $calendarRepository) {
-        $this->calendarRepository = $calendarRepository;
-    }
-
-
+    
     public function addCalendar() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_SESSION['ID_User'];
-            $programId = $_POST['ID_program'];
-            $day = $_POST['day']; // Assurez-vous que cela correspond à votre champ dans le formulaire
+        try {
+           
+            $program = new ProgramRepository();
+            $calendar = new Calendar();
+            $calendar->setID_User($_SESSION['ID_User']);
 
-            if (!empty($userId) && !empty($programId) && !empty($day)) {
-                // Créer une instance de Calendar
-                $calendar = new Calendar();
-                $calendar->setID_User($userId);
-                $calendar->setID_Program($programId);
-                $calendar->setDays($day);
+            // repo->getByName('dos')
+            
+            $calendar->setID_Program(isset($_POST['ID_Program']) ? intval($_POST['ID_Program']) : null);
 
-                // Ajouter à la base de données
-                if ($this->calendarRepository->addCalendar($calendar)) {
-                    header("Location: " . HOME_URL . "createWeek?success=Programme ajouté avec succès.");
-                } else {
-                    header("Location: " . HOME_URL . "createWeek?error=Erreur lors de l'ajout du programme.");
-                }
-                exit();
-            } else {
-                header("Location: " . HOME_URL . "createWeek?error=Veuillez remplir tous les champs.");
-                exit();
+
+            $calendar->setDays(isset($_POST['days']) ?array($_POST['days']) : null);
+            
+// var_dump($_POST, $calendar);
+            // Ensure required fields are provided
+            if (empty($calendar->getID_User()) || empty($calendar->getID_Program()) || empty($calendar->getDays())) {
+               
+                throw new \Exception('Tous les champs sont obligatoires.');
             }
+
+           
+
+           
+
+            // Call repository to create the program
+            $calendarRepository = new CalendarRepository();
+            $calendarRepository->addCalendar($calendar); // Pass the Program object to the repository
+
+            echo json_encode(['message' => 'enregistrement réussi']);
+            // Redirect on success
+            // header('Location: ' . HOME_URL . 'admin/allprograms?success=Le programme a bien été ajouté.');
+            exit();
+        } catch (\Exception $e) {
+            // Redirect on error with the error message
+            http_response_code(422);
+            echo json_encode(['message' =>$e->getMessage()]);
+            // header('Location: ' . HOME_URL . 'admin/addprograms?error=' . urlencode($e->getMessage()));
+            exit();
         }
     }
+
+  
 }
 

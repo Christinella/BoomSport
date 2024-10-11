@@ -73,9 +73,5 @@ public function getUserByEmail($email){
     echo "Error : ". $e->getMessage();
   }
 }
-public function addSchedule($userId, $programId, $day) {
-  $stmt = $this->DB->prepare("INSERT INTO User_has_day_has_program (ID_User, ID_Program, days) 
-  VALUES (?, ?, ?)");
-  return $stmt->execute([$userId, $programId, $day]);
-}
+
 }

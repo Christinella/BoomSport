@@ -23,18 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
     activityForm.addEventListener('submit', function(event) {
         event.preventDefault(); 
 
-        const sportSelect = document.getElementById('ID_sport');
+       
         const programSelect = document.getElementById('ID_program');
-        const exerciseSelect = document.getElementById('ID_Exercise');
-
-        const sport = sportSelect.options[sportSelect.selectedIndex].text; 
+      
         const program = programSelect.options[programSelect.selectedIndex].text; 
-        const exercise = exerciseSelect.options[exerciseSelect.selectedIndex].text; 
         const day = dayInput.value;
 
-        const message = `Vous avez enregistré:\nJour: ${day}\nSport: ${sport}\nProgramme: ${program}\nExercice: ${exercise}`;
+        const message = `Vous avez enregistré:\nJour: ${day}\nProgramme: ${program}`;
 
         alert(message);
+        fetch('/createWeek', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: "days="+day+"&ID_Program="+program
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`erreur de connexion serveur`);
+            }
+            return response.json();
+        }).then(data => {
+            alert(data.message);
+
+            // Mettre à jour la liste des activités affichée dans la page
+        }).catch(error => {
+            alert('Erreur lors de l\'enregistrement');
+        });
 
         document.getElementById('modal').style.display = 'none';
     });
@@ -57,9 +72,5 @@ document.querySelector('.close-button').addEventListener('click', function() {
     document.getElementById('modal').style.display = 'none';
 });
 
-// Ajoutez ici les fonctions pour mettre à jour les programmes et les exercices selon le sport sélectionné
-document.getElementById('ID_sport').addEventListener('change', function() {
-    const sportId = this.value;
-    
-    // Logique pour mettre à jour les programmes et exercices en fonction de sportId
-});
+
+

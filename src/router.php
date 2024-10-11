@@ -15,7 +15,7 @@ $adminController = new AdminController;
 $sportController = new SportController;
 $programController = new ProgramController;
 $exerciseController = new ExerciseController;
-// $calendarController = new CalendarController;
+$calendarController = new CalendarController;
 
 
 $route = $_SERVER['REDIRECT_URL'];
@@ -48,17 +48,17 @@ switch ($route) {
         // case HOME_URL . 'program':
         //     $programController->showAllProgram();
         //     break;
-        case HOME_URL . 'admin':
-            if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
-                $adminController->displayHomeAdmin();
-            } else {
-                $homeController->connexion();
-            }
-            break;
-        
-        
-    // Page Sport admin
-        case HOME_URL . 'admin/allsports':
+    case HOME_URL . 'admin':
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
+            $adminController->displayHomeAdmin();
+        } else {
+            $homeController->connexion();
+        }
+        break;
+
+
+        // Page Sport admin
+    case HOME_URL . 'admin/allsports':
         $adminController->allSport();
         break;
     case HOME_URL . 'admin/addsport':
@@ -68,36 +68,34 @@ switch ($route) {
             $sportController->displayFormAddSport();
         }
         break;
-        case HOME_URL . 'admin/editsport':
-            $name = isset($_GET['name']) ? $_GET['name'] : null; // Récupérer le nom du sport depuis l'URL
-        
-            if ($methode === 'POST') {
-                // Appeler la méthode pour mettre à jour le sport
-                $sportController->updateSport();
-            } else {
-                // Vérifier si le nom du sport est présent
-                if ($name !== null) {
-                    $sportController->displayFormUpdateSport($name); // Passer le nom pour afficher le bon sport
-                } else {
-                    echo "Nom du sport manquant."; // Gestion d'erreur simple
-                }
-            }
-            break;
-           
-              
+    case HOME_URL . 'admin/editsport':
+        $name = isset($_GET['name']) ? $_GET['name'] : null; // Récupérer le nom du sport depuis l'URL
 
-             // Page Programme admin
-            case HOME_URL . 'admin/allprograms':
-                $adminController->allProgram();
-                break;
-                case HOME_URL . 'admin/addprogram':
-                    if ($methode === 'POST') {
-                        $programController->addProgram();
-                    } else {
-                        $programController->displayFormAddProgram();
-                    }
-                    break;
-                // Page Exercise admin 
+        if ($methode === 'POST') {
+            // Appeler la méthode pour mettre à jour le sport
+            $sportController->updateSport();
+        } else {
+            // Vérifier si le nom du sport est présent
+            if ($name !== null) {
+                $sportController->displayFormUpdateSport($name); // Passer le nom pour afficher le bon sport
+            } else {
+                echo "Nom du sport manquant."; // Gestion d'erreur simple
+            }
+        }
+        break;
+
+        // Page Programme admin
+    case HOME_URL . 'admin/allprograms':
+        $adminController->allProgram();
+        break;
+    case HOME_URL . 'admin/addprogram':
+        if ($methode === 'POST') {
+            $programController->addProgram();
+        } else {
+            $programController->displayFormAddProgram();
+        }
+        break;
+        // Page Exercise admin 
     case HOME_URL . 'admin/allexercises':
         $exerciseController->displayAllexercises();
         break;
@@ -108,16 +106,25 @@ switch ($route) {
             $exerciseController->displayFormAddExercice();
         }
         break;
-        case HOME_URL . 'dashboard':
-            if(isset($_SESSION['connecte']) && $_SESSION['connecte']=== true) {
-                $userController->displayHomeUser();
-            }else{
-                $homeController->connexion();
-            }
-            break;
-            case HOME_URL . 'createWeek':
+    case HOME_URL . 'dashboard':
+        if (isset($_SESSION['connecte']) && $_SESSION['connecte'] === true) {
+            $userController->displayHomeUser();
+        } else {
+            $homeController->connexion();
+        }
+        break;
+    case HOME_URL . 'createWeek':
+        if (isset($_SESSION['connecte']) && $_SESSION['connecte'] === true) {
+            if (!empty($_POST)) {
                 $calendarController->addCalendar();
-            break;
+            } else {
+                $userController->createWeek();
+            }
+        } else {
+            $homeController->connexion();
+        }
+
+        break;
 
     case HOME_URL . 'deconnexion':
         $homeController->logout();

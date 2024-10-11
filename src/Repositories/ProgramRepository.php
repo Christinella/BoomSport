@@ -45,4 +45,13 @@ class ProgramRepository
             echo "Error : ". $e->getMessage();
             }
         }
+        public function getProgramByName($name) {
+            try {
+                $stmt = $this->DB->prepare('SELECT * FROM program WHERE name = :name');
+                $stmt->execute([':name' => $name]);
+                return $stmt->fetch(PDO::FETCH_ASSOC); // Cela doit renvoyer un tableau avec les informations du programme
+            } catch (PDOException $e) {
+                echo "Error : ". $e->getMessage();
+            }
+        }
 }
