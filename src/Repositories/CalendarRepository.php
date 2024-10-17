@@ -18,10 +18,8 @@ class CalendarRepository {
     }
 
     public function addCalendar(Calendar $calendar) {
-     
-        $days = implode(',', $calendar->getDays());
     
-        $sql = "INSERT INTO User_has_day_has_program (ID_User, ID_Program, days)
+        $sql = "INSERT INTO user_has_day_has_program (ID_User, ID_Program, days)
                 VALUES (:ID_User, :ID_Program, :days);";
     
         $statement = $this->DB->prepare($sql);
@@ -29,15 +27,44 @@ class CalendarRepository {
             return $statement->execute([
                 ':ID_User' => $calendar->getID_User(),
                 ':ID_Program' => $calendar->getID_Program(),
-                ':days' => $days // Utiliser la chaîne convertie ici
+                ':days' => $calendar->getDays() 
             ]);
         } catch (PDOException $e) {
             echo "Erreur : ". $e->getMessage();
             return false;
         }
     }
+    public function getUserCalendarPrograms($userId) {
+        try {
+            $stmt = $this->DB->prepare('
+                SELECT udp.ID_Program, udp.Days, p.name AS program_name 
+                FROM User_has_day_has_program udp
+                JOIN program p ON udp.ID_Program = p.ID_Program 
+                WHERE udp.ID_User = :userId
+            ');
+            $stmt->execute(['userId' => $userId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error : " . $e->getMessage();
+            return [];
+        }
+    }
+    public function getProgramById($programId) {
+        try {
+            $stmt = $this->DB->prepare('SELECT * FROM User_has_day_has_program WHERE ID_Program = :programId');
+            $stmt->execute(['programId' => $programId]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    
+    
+    }
+    
     
     
       
-    }
-
+ 

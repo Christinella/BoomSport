@@ -19,16 +19,13 @@ class SportController
         require_once __DIR__ . '/../Views/admin/sports/add_sport.php';
     }
 
-  public function displayFormUpdateSport($name)
+  public function displayFormUpdateSport($ID_Sport)
 {
     try {
-        // Vérifier si le nom est vide
-        if (empty($name)) {
-            throw new Exception('Nom du sport invalide.');
-        }
-
+       
+$ID_Sport = $_GET['ID_Sport'] ;
         // Récupérer le sport en utilisant son nom
-        $sport = $this->SportRepository->getSportByName($name);
+        $sport = $this->SportRepository->getById($ID_Sport);
 
         // Vérifier si le sport a été trouvé
         if (!$sport) {
@@ -46,10 +43,6 @@ class SportController
     }
 }
 
-    
-    
-    
-    
     
 
     public function addSport()
@@ -91,19 +84,23 @@ class SportController
         }
     }
 
-    public function updateSport()
+    public function updateSport($ID_Sport)
     {
         try {
            
-            if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['image'])) {
-             
+         
+             $name = $_POST['name'];
+             $description = $_POST['description'];
+             $image = $_POST['image'];
+
+
                 $sport = new Sport();
            
-                $sport->setID_Sport(intval($_POST['id'])); // Corrigez le nom ici
+                $sport->setID_Sport(intval($ID_Sport)); // Corrigez le nom ici
                 // Assurez-vous que l'ID est bien un entier
-                $sport->setName(htmlspecialchars($_POST['name'])); // Protection contre XSS
-                $sport->setDescription(htmlspecialchars($_POST['description']));
-                $sport->setImage(htmlspecialchars($_POST['image']));
+                $sport->setName(htmlspecialchars($name)); // Protection contre XSS
+                $sport->setDescription(htmlspecialchars($description));
+                $sport->setImage(htmlspecialchars($image));
                 
                 
                 $sportRepository = new SportRepository();
@@ -118,12 +115,10 @@ class SportController
                 } else {
                     throw new Exception('La mise à jour a échoué.');
                 }
-            } else {
-                throw new Exception('Tous les champs sont obligatoires.');
-            }
+            
         } catch (Exception $e) {
           
-            header('Location: ' . HOME_URL . 'admin/editsport?id=' . $_POST['id'] . '&error=' . urlencode($e->getMessage()));
+            header('Location: ' . HOME_URL . 'admin/editsport?id=' . $_POST['ID_Sport'] . '&error=' . urlencode($e->getMessage()));
             exit();
         }
     }
@@ -135,15 +130,32 @@ class SportController
             require_once __DIR__. '/../Views/sport.php';
     
     }
-    public function deleteSport($id_sport) {
-        $sportRepository = new SportRepository();
-        
-        // Supprimer le sport via le repository
-        $sportRepository->deleteSport($id_sport);
-        
-        // Redirection après suppression avec un message de succès
-        header('Location: ' . HOME_URL . 'admin/allsports?success=' . urlencode('Le sport a bien été supprimé.'));
-        exit();
+    public function deleteSport() {
+           try{
+                $ID_Sport = $_POST['ID_Sport'] ?? null;
+    
+                if (!$ID_Sport) {
+                    // $_SESSION['message'] = "ID du sport manquant.";
+                    header('Location: ' . HOME_URL . 'admin/allsports?error=ID du sport manquant.');
+                    exit();
+                }
+    
+                $sportRepository = new SportRepository();
+                if ($sportRepository->deleteSport($ID_Sport)) {
+                    $_SESSION['message'] = "Sport supprimé avec succès.";
+                } else {
+                    $_SESSION['message'] = "Erreur lors de la suppression du sport.";
+                }
+    
+                header('Location: ' . HOME_URL . 'admin/allsports');
+                exit();
+            } 
+            catch (Exception $e) {
+                // $_SESSION['message'] = $e->getMessage();
+                header('Location: ' . HOME_URL . 'admin/allsports?error='. urlencode($e->getMessage()));
+                exit();
+            }
+       
     }
     
     

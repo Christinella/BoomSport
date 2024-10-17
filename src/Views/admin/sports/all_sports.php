@@ -34,10 +34,11 @@ use src\Repositories\SportRepository;
                             <h5 class="card-title"><?php echo htmlspecialchars($sport['name']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($sport['description']); ?></p>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <a href="<?= HOME_URL . 'admin/editsport?name=' . urlencode($sport['name']) ?>" class="btn btn-primary">Modifier</a>
+                                <a href="<?= HOME_URL . 'admin/editsport?ID_Sport=' .($sport['ID_Sport']) ?>" class="btn btn-primary">Modifier</a>
 
-                                <form action="<?php echo HOME_URL . 'admin/allsports'; ?>" method="post" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                <form action="<?php echo HOME_URL . 'admin/allsports/delete'; ?>" method="post" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce sport ?');">
+                                <input type="hidden" name="ID_Sport" value="<?php echo htmlspecialchars($sport['ID_Sport']); ?>" >    
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
                             </div>
                         </div>

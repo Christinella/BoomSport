@@ -2,6 +2,7 @@
 
 namespace src\Controllers;
 
+use Exception;
 use src\Models\Exercise;
 use src\Repositories\ProgramRepository;
 use src\Repositories\ExerciseRepository;
@@ -76,6 +77,34 @@ class ExerciseController{
 
           exit();
     }
+    public function deleteExercise() {
+        try{
+             $ID_Exercise = $_POST['ID_Exercise'] ?? null;
+ 
+             if (!$ID_Exercise) {
+                 // $_SESSION['message'] = "ID du sport manquant.";
+                 header('Location: ' . HOME_URL . 'admin/allexercises?error=ID du programme manquant.');
+                 exit();
+             }
+ 
+            $exerciseRepository = new ExerciseRepository();
+    
+             if ($exerciseRepository->deleteExercise($ID_Exercise)) {
+                 $_SESSION['message'] = "Program supprimé avec succès.";
+             } else {
+                 $_SESSION['message'] = "Erreur lors de la suppression du program.";
+             }
+ 
+             header('Location: ' . HOME_URL . 'admin/allexercises');
+             exit();
+         } 
+         catch (Exception $e) {
+             // $_SESSION['message'] = $e->getMessage();
+             header('Location: ' . HOME_URL . 'admin/allexercises?error='. urlencode($e->getMessage()));
+             exit();
+         }
+    
+ }
     
 }
 

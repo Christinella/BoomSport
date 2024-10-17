@@ -40,7 +40,12 @@ class ExerciseRepository
         return $exercise;
     }
 
-
+    public function deleteExercise($ID_Exercise): bool
+    {
+        $sql = "DELETE FROM exercise WHERE ID_Exercise = :ID_Exercise"; 
+        $statement = $this->DB->prepare($sql);
+        return $statement->execute([':ID_Exercise' => $ID_Exercise]); 
+    }
 
     public function getAllExercises(){
     try {

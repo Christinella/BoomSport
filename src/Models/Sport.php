@@ -14,7 +14,7 @@ final class Sport
     use Hydratation;
 
     // Getter for ID_Sport
-    public function getID_Sport(): int
+    public function getID_Sport():? int
     {
         return $this->ID_Sport;
     }

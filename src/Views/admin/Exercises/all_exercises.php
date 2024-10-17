@@ -35,8 +35,9 @@ include_once __DIR__ . "/../../Includes/navbar.php";
                             </ul>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <a href="<?php echo HOME_URL . 'admin/editsport' . $exercise['ID_Program']; ?>" class="btn btn-primary">Modifier</a>
-                                <form action="<?php echo HOME_URL . 'admin/deletesport' . $exercise['ID_Program']; ?>" method="post">
-                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                <form action="<?php echo HOME_URL . 'admin/allexercises/delete'; ?>" method="post" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette exercice ?');">
+                                <input type="hidden" name="ID_Exercise" value="<?php echo htmlspecialchars($exercise['ID_Exercise']); ?>" >    
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
                             </div>
                         </div>

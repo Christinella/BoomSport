@@ -24,11 +24,11 @@ final class Calendar{
         $this->ID_Program = $ID_Program;
     }
     
-    public function getDays(): ?array{
-        return $this->days;
-    }
-    
-    public function setDays(?array $days): void{
-        $this->days = $days;
-    }
+  public function getDays(): ?string {
+    return $this->days;
+  }
+  
+  public function setDays(?string $days): void {
+    $this->days = $days;
+  }
 }

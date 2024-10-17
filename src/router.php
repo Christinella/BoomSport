@@ -45,9 +45,10 @@ switch ($route) {
     case HOME_URL . 'sport':
         $sportController->showAllSport();
         break;
-        // case HOME_URL . 'program':
-        //     $programController->showAllProgram();
-        //     break;
+
+    case HOME_URL . 'program':
+        $programController->showAllProgram();
+        break;
     case HOME_URL . 'admin':
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
             $adminController->displayHomeAdmin();
@@ -67,22 +68,31 @@ switch ($route) {
         } else {
             $sportController->displayFormAddSport();
         }
-        break;
     case HOME_URL . 'admin/editsport':
-        $name = isset($_GET['name']) ? $_GET['name'] : null; // Récupérer le nom du sport depuis l'URL
+        // Récupérer l'ID du sport depuis les paramètres de la requête
 
-        if ($methode === 'POST') {
-            // Appeler la méthode pour mettre à jour le sport
-            $sportController->updateSport();
-        } else {
-            // Vérifier si le nom du sport est présent
-            if ($name !== null) {
-                $sportController->displayFormUpdateSport($name); // Passer le nom pour afficher le bon sport
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Sport'])) {
+            $ID_Sport = $_GET['ID_Sport'];
+
+            if ($methode === 'POST') {
+                $sportController->updateSport($ID_Sport);
             } else {
-                echo "Nom du sport manquant."; // Gestion d'erreur simple
+
+                $sportController->displayFormUpdateSport($ID_Sport);
             }
+        } else {
+            $homeController->connexion();
         }
         break;
+    case HOME_URL . 'admin/allsports/delete':
+        if ($methode === 'POST' && isset($_POST['ID_Sport']) && $_SESSION['adminConnecte'] === true) {
+            $sportController->deleteSport((int)$_POST['ID_Sport']);
+        } else {
+            $homeController->connexion();
+        }
+        break;
+
+
 
         // Page Programme admin
     case HOME_URL . 'admin/allprograms':
@@ -95,6 +105,13 @@ switch ($route) {
             $programController->displayFormAddProgram();
         }
         break;
+        case HOME_URL . 'admin/allprograms/delete':
+            if ($methode === 'POST' && isset($_POST['ID_Program']) && $_SESSION['adminConnecte'] === true) {
+                $programController->deleteProgram((int)$_POST['ID_Program']);
+            } else {
+                $homeController->connexion();
+            }
+            break;
         // Page Exercise admin 
     case HOME_URL . 'admin/allexercises':
         $exerciseController->displayAllexercises();
@@ -106,6 +123,13 @@ switch ($route) {
             $exerciseController->displayFormAddExercice();
         }
         break;
+        case HOME_URL . 'admin/allexercises/delete':
+            if ($methode === 'POST' && isset($_POST['ID_Exercise']) && $_SESSION['adminConnecte'] === true) {
+                $exerciseController->deleteExercise((int)$_POST['ID_Exercise']);
+            } else {
+                $homeController->connexion();
+            }
+            break;
     case HOME_URL . 'dashboard':
         if (isset($_SESSION['connecte']) && $_SESSION['connecte'] === true) {
             $userController->displayHomeUser();
@@ -125,6 +149,7 @@ switch ($route) {
         }
 
         break;
+
 
     case HOME_URL . 'deconnexion':
         $homeController->logout();

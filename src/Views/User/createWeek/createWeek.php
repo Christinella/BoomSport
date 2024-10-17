@@ -1,43 +1,41 @@
 <?php
 include_once __DIR__ . "/../../Includes/navbar.php";
 ?>
+<body>
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Planificateur de Semaine</h1>
-    <div class="row week-planner justify-content-center">
-        <?php 
-        $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-        foreach ($jours as $jour): ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
-                <div class="day card shadow-sm text-center p-3">
-                    <h2><?= $jour ?></h2>
-                    <button class="add-button btn btn-success" data-day="<?= $jour ?>">Ajouter +</button>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <h1 class="text-center mb-4">Choisissez votre Programme</h1>
+    <form action="<?= HOME_URL . 'createWeek' ?>" method="POST">
+        <div class="form-group">
+            <label for="day">Choisissez un jour:</label>
+            <select id="day" name="day" class="form-control" required>
+                <option value="">Sélectionner un jour</option>
+                <option value="Lundi">Lundi</option>
+                <option value="Mardi">Mardi</option>
+                <option value="Mercredi">Mercredi</option>
+                <option value="Jeudi">Jeudi</option>
+                <option value="Vendredi">Vendredi</option>
+                <option value="Samedi">Samedi</option>
+                <option value="Dimanche">Dimanche</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="program">Choisissez un programme:</label>
+            <select id="program" name="program" class="form-control" required>
+               
+                <?php
+                if (!empty($programs)): ?>
+                <?php foreach ($programs as $program): ?>
+                    <option value="<?= htmlspecialchars($program['ID_Program']) ?>">
+                        <?= htmlspecialchars($program['name']) ?> <!-- Assurez-vous que 'name' est la bonne clé -->
+                    </option>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <option value="">Aucun programme disponible</option>
+            <?php endif; ?>
+            </select>
+        </div>
+     
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
 </div>
-
-<div id="modal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Planifier pour <span id="modal-day"></span></h2>
-        <form id="activity-form" action="<?= HOME_URL . 'createWeek' ?>" method="post">
-         
-
-            <div class="mb-3">
-                <label for="ID_program" class="form-label">Sélectionner un programme</label>
-                <select id="ID_program" name="ID_program" class="form-control" required>
-                    <option value="">Sélectionner un programme</option>
-                    <?php foreach ($programs as $program): ?>
-                        <option value="<?= $program['ID_Program'] ?>"><?= htmlspecialchars($program['ID_Program']) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-           
-
-            <input type="hidden" id="day" name="day" value="">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </form>
-    </div>
-</div>
+</body>
