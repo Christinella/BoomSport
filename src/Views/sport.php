@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once __DIR__ . '/Includes/navbar.php';
 include_once __DIR__ . '/Includes/header.php';
 ?>
@@ -12,9 +12,11 @@ include_once __DIR__ . '/Includes/header.php';
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item text-center">
-                                <img src="<?php echo htmlspecialchars($sport['image']); ?>" alt="<?php echo htmlspecialchars($sport['name']); ?>" class="img-fluid">
-                            </li>
+                            <a href="<?= HOME_URL . 'program?ID_Sport=' . $sport['ID_Sport'] ?>">
+                                <li class="list-group-item text-center">
+                                    <img src="<?php echo htmlspecialchars($sport['image']); ?>" alt="<?php echo htmlspecialchars($sport['name']); ?>" class="img-fluid">
+                                </li>
+                            </a>
                             <li class="list-group-item text-center">
                                 <?php echo htmlspecialchars($sport['description']); ?>
                             </li>

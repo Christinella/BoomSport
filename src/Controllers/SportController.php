@@ -23,7 +23,7 @@ class SportController
 {
     try {
        
-$ID_Sport = $_GET['ID_Sport'] ;
+        $ID_Sport = $_GET['ID_Sport'] ;
         // Récupérer le sport en utilisant son nom
         $sport = $this->SportRepository->getById($ID_Sport);
 
@@ -125,38 +125,58 @@ $ID_Sport = $_GET['ID_Sport'] ;
     public function showAllSport() {
             // Récupérer tous les sports à l'aide du repository
             $sports = $this->SportRepository->getAllSports();
-            
+            // var_dump($sports);
+            // die();
             // Afficher la liste des sports dans la vue
             require_once __DIR__. '/../Views/sport.php';
     
     }
+    // public function deleteSport() {
+    //        try{
+    //             $ID_Sport = $_POST['ID_Sport'] ?? null;
+    
+    //             if (!$ID_Sport) {
+    //                 // $_SESSION['message'] = "ID du sport manquant.";
+    //                 header('Location: ' . HOME_URL . 'admin/allsports?error=ID du sport manquant.');
+    //                 exit();
+    //             }
+    
+    //             $sportRepository = new SportRepository();
+    //             if ($sportRepository->deleteSport($ID_Sport)) {
+    //                 $_SESSION['message'] = "Sport supprimé avec succès.";
+    //             } else {
+    //                 $_SESSION['message'] = "Erreur lors de la suppression du sport.";
+    //             }
+    
+    //             header('Location: ' . HOME_URL . 'admin/allsports');
+    //             exit();
+    //         } 
+    //         catch (Exception $e) {
+    //             // $_SESSION['message'] = $e->getMessage();
+    //             header('Location: ' . HOME_URL . 'admin/allsports?error='. urlencode($e->getMessage()));
+    //             exit();
+    //         }
+       
+    // }
+    
     public function deleteSport() {
-           try{
-                $ID_Sport = $_POST['ID_Sport'] ?? null;
+        try {
+            $ID_Sport = $_POST['ID_Sport'] ?? null;
     
-                if (!$ID_Sport) {
-                    // $_SESSION['message'] = "ID du sport manquant.";
-                    header('Location: ' . HOME_URL . 'admin/allsports?error=ID du sport manquant.');
-                    exit();
-                }
-    
-                $sportRepository = new SportRepository();
-                if ($sportRepository->deleteSport($ID_Sport)) {
-                    $_SESSION['message'] = "Sport supprimé avec succès.";
-                } else {
-                    $_SESSION['message'] = "Erreur lors de la suppression du sport.";
-                }
-    
-                header('Location: ' . HOME_URL . 'admin/allsports');
-                exit();
-            } 
-            catch (Exception $e) {
-                // $_SESSION['message'] = $e->getMessage();
-                header('Location: ' . HOME_URL . 'admin/allsports?error='. urlencode($e->getMessage()));
+            if (!$ID_Sport) {
+                echo json_encode(['error' => 'ID du sport manquant.']);
                 exit();
             }
-       
-    }
     
+            $sportRepository = new SportRepository();
+            if ($sportRepository->deleteSport($ID_Sport)) {
+                echo json_encode(['success' => 'Sport supprimé avec succès.']);
+            } else {
+                echo json_encode(['error' => 'Erreur lors de la suppression du sport.']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+    }
     
 }

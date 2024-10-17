@@ -26,7 +26,13 @@ switch ($route) {
         $homeController->displayHome();
         break;
     case HOME_URL . 'connexion':
-        if ($methode === 'POST') {
+        if (isset($_SESSION['adminConnecte']) ) {
+            $adminController->displayHomeAdmin();
+        } 
+        elseif (isset($_SESSION['connecte']) ) {
+            $userController->displayHomeUser();
+        }
+        elseif ($methode === 'POST') {
             $userController->login();
         } else {
             $homeController->connexion();
@@ -47,7 +53,7 @@ switch ($route) {
         break;
 
     case HOME_URL . 'program':
-        $programController->showAllProgram();
+        $programController->showAllProgramForThisSport();
         break;
     case HOME_URL . 'admin':
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
@@ -105,13 +111,29 @@ switch ($route) {
             $programController->displayFormAddProgram();
         }
         break;
-        case HOME_URL . 'admin/allprograms/delete':
-            if ($methode === 'POST' && isset($_POST['ID_Program']) && $_SESSION['adminConnecte'] === true) {
-                $programController->deleteProgram((int)$_POST['ID_Program']);
+    case HOME_URL . 'admin/editprogram':
+        // Récupérer l'ID du sport depuis les paramètres de la requête
+
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Program'])) {
+            $ID_Program = $_GET['ID_Program'];
+
+            if ($methode === 'POST') {
+                $programController->updateProgram($ID_Program);
             } else {
-                $homeController->connexion();
+
+                $programController->displayFormUpdateProgram($ID_Program);
             }
-            break;
+        } else {
+            $homeController->connexion();
+        }
+        break;
+    case HOME_URL . 'admin/allprograms/delete':
+        if ($methode === 'POST' && isset($_POST['ID_Program']) && $_SESSION['adminConnecte'] === true) {
+            $programController->deleteProgram((int)$_POST['ID_Program']);
+        } else {
+            $homeController->connexion();
+        }
+        break;
         // Page Exercise admin 
     case HOME_URL . 'admin/allexercises':
         $exerciseController->displayAllexercises();
@@ -123,13 +145,13 @@ switch ($route) {
             $exerciseController->displayFormAddExercice();
         }
         break;
-        case HOME_URL . 'admin/allexercises/delete':
-            if ($methode === 'POST' && isset($_POST['ID_Exercise']) && $_SESSION['adminConnecte'] === true) {
-                $exerciseController->deleteExercise((int)$_POST['ID_Exercise']);
-            } else {
-                $homeController->connexion();
-            }
-            break;
+    case HOME_URL . 'admin/allexercises/delete':
+        if ($methode === 'POST' && isset($_POST['ID_Exercise']) && $_SESSION['adminConnecte'] === true) {
+            $exerciseController->deleteExercise((int)$_POST['ID_Exercise']);
+        } else {
+            $homeController->connexion();
+        }
+        break;
     case HOME_URL . 'dashboard':
         if (isset($_SESSION['connecte']) && $_SESSION['connecte'] === true) {
             $userController->displayHomeUser();

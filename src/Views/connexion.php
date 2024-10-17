@@ -1,6 +1,5 @@
 <?php
 include_once __DIR__ . '/Includes/navbar.php';
-include_once __DIR__ . '/Includes/header.php';
 
 ?>
 <?php

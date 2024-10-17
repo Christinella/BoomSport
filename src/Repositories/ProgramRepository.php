@@ -45,6 +45,17 @@ class ProgramRepository
             echo "Error : ". $e->getMessage();
             }
         }
+   
+        public function getAllProgramForThisSport($ID_Sport)
+        {
+            try {
+                $stmt = $this->DB->prepare('SELECT * FROM program WHERE ID_Sport = :ID_Sport');
+                $stmt->execute([':ID_Sport' => $ID_Sport]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Error : ". $e->getMessage();
+            }
+        }
         public function getAllPrograms(){
             try {
                 // Requête SQL modifiée pour inclure le nom du sport
@@ -57,6 +68,37 @@ class ProgramRepository
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 echo "Error : ". $e->getMessage();
+            }
+        }
+        public function updateProgram(Program $program){
+            try {
+                $sql = "UPDATE program 
+                SET name = :name, 
+                image = :image, 
+                ID_Sport = :ID_Sport 
+                WHERE ID_Program = :ID_Program";
+                
+                $statement = $this->DB->prepare($sql);
+
+                $statement->execute([
+                    ':name'               => $program->getName(),
+                    ':image'              => $program->getImage(),
+                    ':ID_Sport'            => $program->getID_Sport(),
+                    ':ID_Program'          => $program->getID_Program(),
+                ]);
+                return true;
+            } catch (PDOException $e) {
+                echo "Error : ". $e->getMessage();
+                return false;
+            }
+        }
+        public function getByID($ID_Program){
+          {
+                $sql = "SELECT * FROM program WHERE ID_Program = :ID_Program";
+                $statement = $this->DB->prepare($sql);
+                $statement->execute([':ID_Program' => $ID_Program]);
+                $statement->setFetchMode(PDO::FETCH_CLASS, Program::class);
+                return $statement->fetch();
             }
         }
         public function deleteProgram($ID_Program): bool

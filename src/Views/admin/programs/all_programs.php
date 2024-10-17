@@ -30,7 +30,7 @@ include_once __DIR__ . "/../../Includes/navbar.php";
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($program['name']); ?></h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <a href="<?php echo HOME_URL . 'admin/editsport/' . $program['ID_Program']; ?>" class="btn btn-primary">Modifier</a>
+                            <a href="<?= HOME_URL . 'admin/editprogram?ID_Program='  .($program['ID_Program']) ?>" class="btn btn-primary">Modifier</a>
                                 
                                 <form action="<?php echo HOME_URL . 'admin/allprograms/delete'; ?>" method="post" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce programme ?');">
                                 <input type="hidden" name="ID_Program" value="<?php echo htmlspecialchars($program['ID_Program']); ?>" >    
