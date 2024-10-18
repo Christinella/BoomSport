@@ -38,7 +38,7 @@ class CalendarRepository {
         try {
             $stmt = $this->DB->prepare('
                 SELECT udp.ID_Program, udp.Days, p.name AS program_name 
-                FROM User_has_day_has_program udp
+                FROM user_has_day_has_program udp
                 JOIN program p ON udp.ID_Program = p.ID_Program 
                 WHERE udp.ID_User = :userId
             ');
@@ -51,7 +51,7 @@ class CalendarRepository {
     }
     public function getProgramById($programId) {
         try {
-            $stmt = $this->DB->prepare('SELECT * FROM User_has_day_has_program WHERE ID_Program = :programId');
+            $stmt = $this->DB->prepare('SELECT * FROM user_has_day_has_program WHERE ID_Program = :programId');
             $stmt->execute(['programId' => $programId]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

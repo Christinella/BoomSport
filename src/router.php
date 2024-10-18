@@ -145,6 +145,22 @@ switch ($route) {
             $exerciseController->displayFormAddExercice();
         }
         break;
+          case HOME_URL . 'admin/editexercice':
+        // Récupérer l'ID du sport depuis les paramètres de la requête
+
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Exercise'])) {
+            $ID_Exercise = $_GET['ID_Exercise'];
+
+            if ($methode === 'POST') {
+                $exerciseController->updateExercise($ID_Exercise);
+            } else {
+
+                $exerciseController->displayFormUpdateExercise($ID_Exercise);
+            }
+        } else {
+            $homeController->connexion();
+        }
+        break;
     case HOME_URL . 'admin/allexercises/delete':
         if ($methode === 'POST' && isset($_POST['ID_Exercise']) && $_SESSION['adminConnecte'] === true) {
             $exerciseController->deleteExercise((int)$_POST['ID_Exercise']);

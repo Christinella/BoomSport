@@ -24,9 +24,14 @@ include_once __DIR__ . '/Includes/navbar.php';
     </div>
 
     <div class="mb-3">
-        <label for="password" class="form-label">Mot de passe:</label>
-        <input type="password" id="password" name="password" class="form-control"> <!-- Champ de même taille -->
-    </div>
+            <label for="password" class="form-label">Mot de passe:</label>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Entrez votre mot de passe" name="password" class="form-control">
+                <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                    <i class="fa fa-eye" id="eyeIcon"></i>
+                </span>
+            </div>
+        </div>
 
     <div class="mb-3">
         <a href="<?= HOME_URL . 'inscription' ?>">Je n'ai pas de compte</a>

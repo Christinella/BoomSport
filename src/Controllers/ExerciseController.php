@@ -9,13 +9,41 @@ use src\Repositories\ExerciseRepository;
 
 
 class ExerciseController{
+    private $exerciseRepository;
+    private $programRepository;
     
+    public function __construct()
+    {
+        $this->exerciseRepository = new ExerciseRepository();
+    }
     public function displayFormAddExercice(){
         
         $programRepository = new ProgramRepository();
         
         $programs = $programRepository->getAllProgram(); // Get all programs to display in the form (names and IDs)
         require_once __DIR__.'/../Views/admin/Exercises/add_exercises.php';
+    }
+    public function displayFormUpdateExercise($ID_Exercise)
+    {
+        try {
+
+            $ID_Exercise = $_GET['ID_Exercise'];
+
+            $exercise = $this->exerciseRepository->getByID($ID_Exercise);
+
+
+            if (!$exercise) {
+                throw new Exception('Programme non trouvé.');
+            }
+            $this->programRepository = new ProgramRepository();
+            $sports = $this->programRepository->getAllProgram();
+            include __DIR__ . '/../Views/admin/Exercises/edit_exercise.php';
+        } catch (Exception $e) {
+
+            $error = $e->getMessage();
+            include __DIR__ . '/../Views/admin/Exercises/edit_exercise.php';
+            exit;
+        }
     }
     public function addExercise()
     {
@@ -62,6 +90,36 @@ class ExerciseController{
         } catch (\Exception $e) {
             // Redirect on error with the error message
             header('Location: ' . HOME_URL . 'admin/addexercise?error=' . urlencode($e->getMessage())); // Updated redirection URL
+            exit();
+        }
+    }
+    public function updateExercise($ID_Exercise)
+    {
+        try {
+            $name = $_POST['name'];
+            $image = $_POST['image'];
+            $ID_Program = $_POST['ID_Program'];
+
+            $exercise = new Exercise();
+
+            // Attention ici, le nom de la méthode est `setID_Program`
+            $exercise->setID_Exercise(intval($ID_Exercise)); // Correct ici
+
+            $exercise->setName(htmlspecialchars($name)); // Protection contre XSS
+            $exercise->setImage(htmlspecialchars($image));
+            $exercise->setID_Program(intval($ID_Program));
+
+            $exerciseRepository = new ExerciseRepository();
+            $isUpdated = $exerciseRepository->updateExercise($exercise);
+
+            if ($isUpdated) {
+                header('Location: ' . HOME_URL . 'admin/allprograms?success=' . urlencode('Le programme a bien été modifié.'));
+                exit();
+            } else {
+                throw new Exception('La mise à jour a échoué.');
+            }
+        } catch (Exception $e) {
+            header('Location: ' . HOME_URL . 'admin/editprogram?ID_Program=' . $_POST['ID_Program'] . '&error=' . urlencode($e->getMessage()));
             exit();
         }
     }
