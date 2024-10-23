@@ -6,15 +6,14 @@ use src\Services\Hydratation;
 
 final class Program
 {
-    // Define properties with proper type hints
+    
     private ?int $ID_Program = null;
     private ?string $name = null;
     private ?string $image = null;
     private ?int $ID_Sport = null;
 
     use Hydratation;
-
-    // Getter and Setter for ID_Program
+   
     public function getID_Program(): ?int
     {
         return $this->ID_Program;
@@ -25,7 +24,6 @@ final class Program
         $this->ID_Program = $ID_Program;
     }
 
-    // Getter and Setter for name
     public function getName(): ?string
     {
         return $this->name;
@@ -36,7 +34,6 @@ final class Program
         $this->name = $name;
     }
 
-    // Getter and Setter for image
     public function getImage(): ?string
     {
         return $this->image;
@@ -47,7 +44,6 @@ final class Program
         $this->image = $image;
     }
 
-    // Getter and Setter for ID_Sport
     public function getID_Sport(): ?int
     {
         return $this->ID_Sport;

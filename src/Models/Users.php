@@ -51,7 +51,7 @@ class Users
 
     public function getisAdmin(): bool
     {
-        return $this->isAdmin ?? false; // Si null, retourne false
+        return $this->isAdmin ?? false; 
     }
 
     public function setisAdmin(bool $isAdmin): void 

@@ -4,14 +4,14 @@
    
         <div class="social-icons">
 
-            <a href="https://www.instagram.com" target="_blank">
+            <a href="https://www.instagram.com/boumsport/" target="_blank">
                 <img src="https://img.icons8.com/ios-filled/50/003366/instagram-new.png" alt="Instagram" />
             </a>
         </div>
 
         <div class="mentions-legales">
             <p>&copy; 2024 BoumSport. Tous droits réservés.</p>
-            <p><a href="/mentions-legales" style="color: #003366;">Mentions légales</a></p>
+           
         </div>
  
 </footer>

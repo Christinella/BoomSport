@@ -6,7 +6,8 @@ include_once __DIR__ . "/../../Includes/navbar.php";
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center my-4">Ajouter un nouveau exercice</h2>
+            <?php if (isset($exercise)): ?>
+                <h2 class="text-center my-4">Modifie l'exercice</h2>
 
                 <?php if (isset($_GET['error'])): ?>
                     <div class="alert alert-danger"><?php echo $_GET['error']; ?></div>
@@ -35,20 +36,23 @@ include_once __DIR__ . "/../../Includes/navbar.php";
                         <input type="text" id="serie" name="serie" class="form-control" required value="<?= htmlspecialchars($exercise->getSerie()) ?>">
                     </div>
 
-                    <!-- Sport Selection Dropdown -->
+                   
                 
                     <div class="mb-3">
-                        <label for="ID_Program" class="form-label"> modifie le programme</label>
+                    <label for="ID_Program" class="form-label">Sélectionner un programme</label>
                         <select id="ID_Program" name="ID_Program" class="form-control" required>
                             <option value="">Sélectionner un programme</option>
                             <?php foreach ($programs as $program): ?>
                                 <option value="<?= $program['ID_Program'] ?>"><?= htmlspecialchars($program['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
-                  
+                    </div>
 
                     <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
                 </form>
+             <?php else: ?>
+            <div class="alert alert-danger text-center mt-4">Sport non trouvé ou erreur lors du chargement.</div>
+        <?php endif; ?>
             </div>
         </div>
     </div>

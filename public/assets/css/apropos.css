@@ -1,5 +1,68 @@
 
-.carousel-item img {
-    height: 200px; /* Hauteur personnalisée des images */
-    object-fit: cover; /* Assure que l'image couvre bien l'espace tout en gardant ses proportions */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.quote {
+    font-style: italic;
+    text-align: center;
+    border-left: 4px solid #007bff;
+    padding-left: 20px;
+    margin: 20px 0;
+    color: #007bff;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .quote {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 0.8em;
+    }
+
+    .quote {
+        font-size: 1em;
+    }
 }

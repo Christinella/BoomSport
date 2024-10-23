@@ -65,7 +65,7 @@ CREATE TABLE User_has_day_has_program
 (
   ID_User    INT     NOT NULL,
   ID_Program INTEGER NOT NULL,
-  days       DATE    NOT NULL,
+  days       VARCHAR(20)    NOT NULL,
   PRIMARY KEY (ID_User, ID_Program)
 );
 

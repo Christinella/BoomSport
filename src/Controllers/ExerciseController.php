@@ -93,6 +93,7 @@ class ExerciseController{
             exit();
         }
     }
+
     public function updateExercise($ID_Exercise)
     {
         try {
@@ -102,10 +103,9 @@ class ExerciseController{
 
             $exercise = new Exercise();
 
-            // Attention ici, le nom de la méthode est `setID_Program`
-            $exercise->setID_Exercise(intval($ID_Exercise)); // Correct ici
+            $exercise->setID_Exercise(intval($ID_Exercise)); 
 
-            $exercise->setName(htmlspecialchars($name)); // Protection contre XSS
+            $exercise->setName(htmlspecialchars($name)); 
             $exercise->setImage(htmlspecialchars($image));
             $exercise->setID_Program(intval($ID_Program));
 
@@ -113,24 +113,24 @@ class ExerciseController{
             $isUpdated = $exerciseRepository->updateExercise($exercise);
 
             if ($isUpdated) {
-                header('Location: ' . HOME_URL . 'admin/allprograms?success=' . urlencode('Le programme a bien été modifié.'));
+                header('Location: ' . HOME_URL . 'admin/allexercises?success=' . urlencode("L'exercice a bien été modifié."));
                 exit();
             } else {
                 throw new Exception('La mise à jour a échoué.');
             }
         } catch (Exception $e) {
-            header('Location: ' . HOME_URL . 'admin/editprogram?ID_Program=' . $_POST['ID_Program'] . '&error=' . urlencode($e->getMessage()));
+            header('Location: ' . HOME_URL . 'admin/editexercice?ID_Exercise=' . $_POST['ID_Program'] . '&error=' . urlencode($e->getMessage()));
             exit();
         }
     }
     public function displayAllexercises(){
-          // Call repository to create the exercise 
+
           $exerciseRepository = new ExerciseRepository();
           $exercices = $exerciseRepository->getAllExercises(); // Pass the Exercise object to the repository
-        //   var_dump($exercices);
-        //   die();
   
-          // Redirect on success
+
+  
+   
         require_once __DIR__ . '/../Views/admin/exercises/all_exercises.php';
 
           exit();
@@ -140,7 +140,7 @@ class ExerciseController{
              $ID_Exercise = $_POST['ID_Exercise'] ?? null;
  
              if (!$ID_Exercise) {
-                 // $_SESSION['message'] = "ID du sport manquant.";
+           
                  header('Location: ' . HOME_URL . 'admin/allexercises?error=ID du programme manquant.');
                  exit();
              }
@@ -157,13 +157,34 @@ class ExerciseController{
              exit();
          } 
          catch (Exception $e) {
-             // $_SESSION['message'] = $e->getMessage();
+        
              header('Location: ' . HOME_URL . 'admin/allexercises?error='. urlencode($e->getMessage()));
              exit();
+         }
+        }
+         public function showAllExerciseForThisProgram()
+         {
+             try {
+                 $ID_Program = $_GET['ID_Program'] ?? null;
+                 if (!$ID_Program) {
+                     throw new Exception('ID du programme manquant.');
+                 }
+     
+                 $exerciseRepository = new ExerciseRepository();
+                 $exercises = $exerciseRepository->getAllExerciceForThisProgram($ID_Program);
+     
+               
+                 require_once __DIR__ . '/../Views/exercice.php';
+             } catch (Exception $e) {
+          
+                 $_SESSION['error'] = $e->getMessage();
+                 header('Location: ' . HOME_URL . 'program');
+                 exit();
+             }
          }
     
  }
     
-}
+
 
 

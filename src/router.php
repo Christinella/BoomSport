@@ -55,6 +55,9 @@ switch ($route) {
     case HOME_URL . 'program':
         $programController->showAllProgramForThisSport();
         break;
+        case HOME_URL . 'exercice':
+            $exerciseController->showAllExerciseForThisProgram();
+            break;
     case HOME_URL . 'admin':
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
             $adminController->displayHomeAdmin();
@@ -66,16 +69,20 @@ switch ($route) {
 
         // Page Sport admin
     case HOME_URL . 'admin/allsports':
-        $adminController->allSport();
+        if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] == true) {
+            $adminController->allSport();
+        }else{
+            $homeController->connexion();
+        }
+     
         break;
     case HOME_URL . 'admin/addsport':
-        if ($methode === 'POST') {
+        if ($methode === 'POST' && $_SESSION['adminConnecte'] === true) {
             $sportController->addSport();
         } else {
             $sportController->displayFormAddSport();
         }
     case HOME_URL . 'admin/editsport':
-        // Récupérer l'ID du sport depuis les paramètres de la requête
 
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Sport'])) {
             $ID_Sport = $_GET['ID_Sport'];
@@ -98,8 +105,6 @@ switch ($route) {
         }
         break;
 
-
-
         // Page Programme admin
     case HOME_URL . 'admin/allprograms':
         $adminController->allProgram();
@@ -112,7 +117,6 @@ switch ($route) {
         }
         break;
     case HOME_URL . 'admin/editprogram':
-        // Récupérer l'ID du sport depuis les paramètres de la requête
 
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Program'])) {
             $ID_Program = $_GET['ID_Program'];
@@ -146,7 +150,7 @@ switch ($route) {
         }
         break;
           case HOME_URL . 'admin/editexercice':
-        // Récupérer l'ID du sport depuis les paramètres de la requête
+    
 
         if (isset($_SESSION['adminConnecte']) && $_SESSION['adminConnecte'] === true && isset($_GET['ID_Exercise'])) {
             $ID_Exercise = $_GET['ID_Exercise'];

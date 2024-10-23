@@ -36,7 +36,7 @@ class UsersRepository
             ':isAdmin' => $Users->getisAdmin()
         ]);
         
-        // Récupération de l'ID de l'utilisateur nouvellement créé
+       
         $id_users = $this->DB->lastInsertId();
         $Users->setID_User($id_users);
 

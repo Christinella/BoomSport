@@ -13,49 +13,49 @@ final class Sport
 
     use Hydratation;
 
-    // Getter for ID_Sport
+
     public function getID_Sport():? int
     {
         return $this->ID_Sport;
     }
 
-    // Setter for ID_Sport
+
     public function setID_Sport(int $ID_Sport): void
     {
-        $this->ID_Sport = $ID_Sport; // Corrected property name
+        $this->ID_Sport = $ID_Sport; 
     }
 
-    // Getter for name
+ 
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    // Setter for name
+  
     public function setName(?string $name): void
     {
-        $this->name = $name; // Corrected property name
+        $this->name = $name; 
     }
 
-    // Getter for image
+
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    // Setter for image
+   
     public function setImage(?string $image): void
     {
-        $this->image = $image; // Corrected property name
+        $this->image = $image; 
     }
 
-    // Getter for description
+  
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    // Setter for description
+
     public function setDescription(?string $description): void
     {
         $this->description = $description;

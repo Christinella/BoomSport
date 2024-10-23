@@ -55,7 +55,7 @@ class SportRepository
         ]);
     }
 
-    public function getById($id_sport) // Renommée pour éviter la redondance
+    public function getById($id_sport) 
     {
         $sql = "SELECT * FROM sport WHERE id_sport = :id_sport";
         $statement = $this->DB->prepare($sql);

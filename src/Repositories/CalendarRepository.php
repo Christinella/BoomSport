@@ -37,7 +37,7 @@ class CalendarRepository {
     public function getUserCalendarPrograms($userId) {
         try {
             $stmt = $this->DB->prepare('
-                SELECT udp.ID_Program, udp.Days, p.name AS program_name 
+                SELECT udp.ID_Program, udp.days, p.name AS program_name 
                 FROM user_has_day_has_program udp
                 JOIN program p ON udp.ID_Program = p.ID_Program 
                 WHERE udp.ID_User = :userId

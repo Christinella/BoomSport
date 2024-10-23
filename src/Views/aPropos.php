@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . "/Includes/navbar.php";
-include_once __DIR__ . "/Includes/header.php";
+
 ?>
 
 <body>
@@ -52,7 +52,7 @@ include_once __DIR__ . "/Includes/header.php";
 </div>
 
 <?php
-include_once __DIR__ . "/Includes/footer.php"; // Inclure le footer
+include_once __DIR__ . "/Includes/footer.php"; 
 ?>
 
 

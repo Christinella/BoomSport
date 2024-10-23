@@ -4,7 +4,7 @@
             
             deleteForms.forEach(form => {
                 form.addEventListener('submit', function(e) {
-                    e.preventDefault(); // Empêche l'envoi traditionnel du formulaire
+                    e.preventDefault(); 
                     
                     if (confirm('Êtes-vous sûr de vouloir supprimer ce sport ?')) {
                         const formData = new FormData(this);
@@ -14,16 +14,16 @@
                             method: 'POST',
                             body: formData
                         })
-                        .then(response => response.json()) // On attend une réponse en JSON
+                        .then(response => response.json()) 
                         .then(data => {
                             if (data.success) {
-                                // Suppression réussie, on retire le sport de l'affichage
+                              
                                 document.querySelector(`#sport-card-${sportId}`).remove();
 
-                                // Afficher un message de succès
+                             
                                 displayMessage(data.success, 'success');
                             } else if (data.error) {
-                                // Afficher un message d'erreur
+                              $
                                 displayMessage(data.error, 'danger');
                             }
                         })
@@ -35,7 +35,7 @@
                 });
             });
 
-            // Fonction pour afficher un message
+          
             function displayMessage(message, type) {
                 const messageContainer = document.getElementById('message-container');
                 messageContainer.innerHTML = `
@@ -51,7 +51,7 @@
         const passwordInput = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
 
-        // Alterner entre le type de mot de passe et le type de texte
+       
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             eyeIcon.classList.remove('fa-eye');
@@ -62,3 +62,24 @@
             eyeIcon.classList.add('fa-eye');
         }
     });
+    feather.replace();
+
+    document.querySelectorAll('.program-card').forEach(card => {
+        card.addEventListener('mouseover', () => {
+            card.style.transform = 'scale(1.05)';
+        });
+        card.addEventListener('mouseout', () => {
+            card.style.transform = 'scale(1)';
+        });
+    });
+    const selectedDays = [];
+
+    document.getElementById('day').addEventListener('change', function() {
+        const selectedValue = this.value;
+        if (selectedValue) {
+            selectedDays.push(selectedValue);
+            updateDayOptions();
+        }
+    });
+    
+   

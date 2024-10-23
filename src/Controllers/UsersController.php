@@ -30,12 +30,10 @@ class UsersController
         try {
             $users = new Users();
 
-            // Récupérer les valeurs du formulaire et les assigner à l'objet
             $pseudonym = isset($_POST['pseudonym']) ? htmlspecialchars($_POST['pseudonym']) : null;
             $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null;
             $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
 
-            // Vérifications
             if (empty($pseudonym) || empty($email) || empty($password)) {
                 throw new Exception('Tous les champs sont obligatoires.');
             }
@@ -43,22 +41,21 @@ class UsersController
                 throw new Exception('Le pseudonyme doit contenir entre 3 et 20 caractères.');
             }
 
-            // Assignation des valeurs à l'objet Users
             $users->setPseudonym($pseudonym);
             $users->setEmail($email);
 
-            // Hachage du mot de passe
+         
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $users->setPassword($hashedPassword);
 
-            $isAdmin = 0; // valeur par défaut pour isAdmin
+            $isAdmin = 0; 
             $users->setisAdmin($isAdmin);
             
-            // Insertion dans la base de données
+          
             $userRepository = new UsersRepository();
             $userRepository->createUser($users);
 
-            // Stocker les informations de l'utilisateur dans la session
+        
             $_SESSION['ID_User'] = $users->getID_User();
             $_SESSION['Pseudonym'] = $users->getPseudonym();
             $_SESSION['Email'] = $users->getEmail();

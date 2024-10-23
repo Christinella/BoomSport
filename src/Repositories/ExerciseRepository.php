@@ -34,8 +34,8 @@ class ExerciseRepository
             ':ID_Program'         => $exercise->getID_Program(),
           
         ]);
-        $id_exercice = $this->DB->lastInsertId();
-        $exercise->setID_Exercise($id_exercice);
+        $ID_Exercise = $this->DB->lastInsertId();
+        $exercise->setID_Exercise($ID_Exercise);
       
         return $exercise;
     }
@@ -73,6 +73,16 @@ class ExerciseRepository
         $statement->setFetchMode(PDO::FETCH_CLASS, Exercise::class);
         return $statement->fetch();
       }
+      public function getAllExerciceForThisProgram($ID_Program){
+        try {
+            $stmt = $this->DB->prepare('SELECT * FROM exercise WHERE ID_Program = :ID_Program');
+            $stmt->execute([':ID_Program' => $ID_Program]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error : ". $e->getMessage();
+        }
+      }
+       
     public function deleteExercise($ID_Exercise): bool
     {
         $sql = "DELETE FROM exercise WHERE ID_Exercise = :ID_Exercise"; 

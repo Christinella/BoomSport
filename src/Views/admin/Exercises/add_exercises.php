@@ -35,7 +35,6 @@ include_once __DIR__ . "/../../Includes/navbar.php";
                         <input type="text" id="serie" name="serie" class="form-control" required>
                     </div>
 
-                    <!-- Sport Selection Dropdown -->
                 
                     <div class="mb-3">
                         <label for="ID_Program" class="form-label">Sélectionner un programme</label>

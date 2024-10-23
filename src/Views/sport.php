@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/Includes/navbar.php';
-include_once __DIR__ . '/Includes/header.php';
+
 ?>
 <div class="row justify-content-center">
     <?php if (!empty($sports)): ?>
@@ -26,7 +26,7 @@ include_once __DIR__ . '/Includes/header.php';
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>Aucun sport n'a été trouvé.</p>
+        <p>Aucun sport disponible.</p>
     <?php endif; ?>
 </div>
 <?php include_once __DIR__ . "/Includes/footer.php"; ?>
