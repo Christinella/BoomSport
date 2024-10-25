@@ -12,6 +12,7 @@ use src\Repositories\CalendarRepository;
                 </div>
 
                 <?php
+             
                 if (isset($_SESSION['Pseudonym']) && isset($_SESSION['Email']) && isset($_SESSION['ID_User'])) {
                     $pseudonym = $_SESSION['Pseudonym'];
                     $email = $_SESSION['Email'];
@@ -25,13 +26,13 @@ use src\Repositories\CalendarRepository;
 
                     $calendarRepository = new CalendarRepository();
                     $userPrograms = $calendarRepository->getUserCalendarPrograms($userId);
-
-                    if (!empty($userPrograms)) {
+                    
+                    if (!empty($userPrograms))
+                     {
                         echo "<h2 class='mb-4' style='color: #3a3b3c;'>Vos programmes :</h2>";
-                        
                         echo '<div class="row">';
-
                         foreach ($userPrograms as $program) {
+                            
                             echo '
                                 <div class="col-md-4 mb-4">
                                     <div class="card program-card shadow-lg" style="border-radius: 12px; transition: transform 0.3s; background-color: #fff;">
@@ -44,7 +45,6 @@ use src\Repositories\CalendarRepository;
                                     </div>
                                 </div>';
                         }
-
                         echo '</div>';
                     } else {
                         echo "<p>Aucun programme trouvé.</p>";
@@ -56,3 +56,5 @@ use src\Repositories\CalendarRepository;
             </main>
         </div>
     </div>
+</body>
+</html>

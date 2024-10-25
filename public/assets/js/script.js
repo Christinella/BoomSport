@@ -1,5 +1,5 @@
         document.addEventListener('DOMContentLoaded', function() {
-            // Sélectionne tous les formulaires de suppression
+            
             const deleteForms = document.querySelectorAll('form[action*="allsports/delete"]');
             
             deleteForms.forEach(form => {

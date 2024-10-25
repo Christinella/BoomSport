@@ -24,19 +24,19 @@ class SportController
     try {
        
         $ID_Sport = $_GET['ID_Sport'] ;
-        // Récupérer le sport en utilisant son nom
+       
         $sport = $this->SportRepository->getById($ID_Sport);
 
-        // Vérifier si le sport a été trouvé
+       
         if (!$sport) {
             throw new Exception('Sport non trouvé.');
         }
 
-        // Inclure la vue pour afficher le formulaire de mise à jour du sport
+     
         include __DIR__ . '/../Views/admin/sports/edit_sport.php';
 
     } catch (Exception $e) {
-        // En cas d'exception, afficher l'erreur dans la vue
+      
         $error = $e->getMessage();
         include __DIR__ . '/../Views/admin/sports/edit_sport.php';
         exit;

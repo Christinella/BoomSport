@@ -4,8 +4,6 @@ include_once __DIR__ . '/Includes/navbar.php';
 
 <div class="container">
     <div class="row">
-       
-
         <?php if (!empty($exercises)): ?>
             <?php foreach ($exercises as $exercise): ?>
                 <div class="col-12 col-sm-6 col-md-4 mb-4">

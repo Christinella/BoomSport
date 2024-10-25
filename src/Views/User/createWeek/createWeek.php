@@ -6,8 +6,8 @@ include_once __DIR__ . "/../../Includes/navbar.php";
     <h1 class="text-center mb-4">Choisissez votre Programme</h1>
     <form action="<?= HOME_URL . 'createWeek' ?>" method="POST">
         <div class="form-group">
-            <label for="day">Choisissez un jour:</label>
-            <select id="day" name="day" class="form-control" required>
+            <label for="days">Choisissez un jour:</label>
+            <select id="days" name="days" class="form-control" required>
                 <option value="">Sélectionner un jour</option>
                 <option value="Lundi">Lundi</option>
                 <option value="Mardi">Mardi</option>

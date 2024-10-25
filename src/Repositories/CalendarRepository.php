@@ -18,22 +18,30 @@ class CalendarRepository {
     }
 
     public function addCalendar(Calendar $calendar) {
-    
         $sql = "INSERT INTO user_has_day_has_program (ID_User, ID_Program, days)
                 VALUES (:ID_User, :ID_Program, :days);";
     
         $statement = $this->DB->prepare($sql);
         try { 
-            return $statement->execute([
+            $result = $statement->execute([
                 ':ID_User' => $calendar->getID_User(),
                 ':ID_Program' => $calendar->getID_Program(),
-                ':days' => $calendar->getDays() 
+                ':days' => $calendar->getDays(), 
             ]);
+    
+          
+            if ($result) {
+                return true;
+            } else {
+                return false; 
+            }
         } catch (PDOException $e) {
-            echo "Erreur : ". $e->getMessage();
+            
+            error_log("Erreur lors de l'ajout au calendrier : " . $e->getMessage());
             return false;
         }
     }
+    
     public function getUserCalendarPrograms($userId) {
         try {
             $stmt = $this->DB->prepare('

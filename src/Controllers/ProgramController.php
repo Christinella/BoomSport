@@ -141,15 +141,7 @@ class ProgramController
             exit();
         }
     }
-    // public function showAllProgram()
-    // {
-    //    
-    //     $programRepository = new ProgramRepository();
-    //     $programs = $programRepository->getAllProgram();
 
-    //     // Afficher la liste des sports dans la vue
-    //     require_once __DIR__ . '/../Views/program.php';
-    // }
     public function showAllProgramForThisSport()
     {
         try {
